@@ -12,7 +12,7 @@ class Label extends Text
         $this->size = 24;
     }
 
-    public function create()
+    public function getFont()
     {
         return function($font) {
             $font->file($this->family);

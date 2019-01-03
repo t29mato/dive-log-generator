@@ -13,7 +13,7 @@ class Unit extends Text
         $this->align = 'right';
     }
 
-    public function create()
+    public function getFont()
     {
         return function($font) {
             $font->file($this->family);
