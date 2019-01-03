@@ -15,6 +15,11 @@ class ImageGeneratorController extends Controller
 
     public function index()
     {
+        return view('index');
+    }
+
+    public function generate()
+    {
         $image = $this->imageGeneratorService->generate();
         return $image->response('jpg');
     }

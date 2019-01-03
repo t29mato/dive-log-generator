@@ -13,3 +13,4 @@
 
 // usage inside a laravel route
 Route::get('/', 'ImageGeneratorController@index');
+Route::post('/', 'ImageGeneratorController@generate');
