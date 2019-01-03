@@ -1,5 +1,6 @@
 <?php
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,7 +15,13 @@
 // usage inside a laravel route
 Route::get('/', function()
 {
-    $img = Image::make('foo.jpg')->resize(300, 200);
-
+    $img = Image::make('photos/IMG_0714.jpg')->heighten(500);
+    $img->text('Hello Would', 240, 100, function($font) {
+        $font->file('foo/bar.ttf');
+        $font->size(50);
+        $font->color('#fdf6e3');
+        $font->align('center');
+        $font->valign('top');
+    });
     return $img->response('jpg');
 });
