@@ -1,6 +1,5 @@
 <?php
 
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,12 +15,16 @@
 Route::get('/', function()
 {
     $img = Image::make('photos/IMG_0714.jpg')->heighten(500);
-    $img->text('Hello Would', 240, 100, function($font) {
-        $font->file('foo/bar.ttf');
-        $font->size(50);
+    $img->text('Hello World', 200, 400, function($font) {
+        $font->file('fonts/Open_Sans/OpenSans-Bold.ttf');
+        $font->size(48);
         $font->color('#fdf6e3');
         $font->align('center');
         $font->valign('top');
     });
     return $img->response('jpg');
+});
+
+Route::get('/php', function () {
+    return view('welcome');
 });
