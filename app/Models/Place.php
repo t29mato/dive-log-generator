@@ -9,7 +9,7 @@ class Place extends Text
     public function __construct()
     {
         parent::__construct();
-        $this->size = 48;
+        $this->size = 36;
         $this->align = 'right';
     }
 

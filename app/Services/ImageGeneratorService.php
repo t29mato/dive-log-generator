@@ -40,14 +40,13 @@ class ImageGeneratorService
         $this->photo = \Image::make($this->photoUrl)->heighten($this->sizeX);
         $this->photo->crop($this->sizeX, $this->sizeY);
 
-        $this->line->text('top',      10, 90, $this->label);
-        $this->line->text('bottom',   10, 170, $this->label);
-        $this->line->text('avg.',     140, 90, $this->label);
-        $this->line->text('max',      140, 170, $this->label);
-        $this->line->text('entry',    270, 90, $this->label);
-        $this->line->text('exit',     270, 170, $this->label);
+        $this->line->text('top', 10, 90, $this->label);
+        $this->line->text('bottom', 10, 170, $this->label);
+        $this->line->text('avg.', 140, 90, $this->label);
+        $this->line->text('max', 140, 170, $this->label);
+        $this->line->text('entry', 270, 90, $this->label);
+        $this->line->text('exit', 270, 170, $this->label);
 
-        $value = new Value();
         $this->line->text('10:00', 100, 40, $this->value);
         $this->line->text('99', 190, 40, $this->value);
         $this->line->text('10:45', 360, 40, $this->value);
@@ -58,14 +57,12 @@ class ImageGeneratorService
         $this->line->text('190', 340, 130, $this->value);
         $this->line->text('80', 340, 210, $this->value);
 
-        $unit = new Unit();
         $this->line->text('min', 240, 40, $this->unit);
         $this->line->text('℃', 100, 130, $this->unit);
         $this->line->text('℃', 100, 210, $this->unit);
         $this->line->text('m', 250, 130, $this->unit);
         $this->line->text('m', 250, 210, $this->unit);
         $this->line->text('bar', 380, 130, $this->unit);
-        $this->line->text('bar', 380, 210, $this->unit);
         $this->line->text('bar', 380, 210, $this->unit);
 
         $this->photo->insert($this->line, 'top-left', 30, 30);
