@@ -55,8 +55,10 @@ class ImageGeneratorService
         }
 
         if (isset($divingLog->timeEntry) && isset($divingLog->timeExit)) {
-            $this->line->text($divingLog->timeDive, 190, 40, $this->value);
-            $this->line->text('min', 240, 40, $this->unit);
+            if ($divingLog->timeDive !== 0) {
+                $this->line->text($divingLog->timeDive, 190, 40, $this->value);
+                $this->line->text('min', 240, 40, $this->unit);
+            }
         }
 
         if (isset($divingLog->tempTop)) {
