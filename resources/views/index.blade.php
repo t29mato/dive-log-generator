@@ -5,7 +5,7 @@
     <table class="table-dive-diagram">
         <tbody>
             <tr>
-                <td class="border-dark border-bottom">
+                <td>
                     <label>Entry Time</label>
                     <div class="input-group">
                         <input tabindex="1" type="time" class="form-control" id="timeEntry" value="10:00">
@@ -14,30 +14,30 @@
                 <td>
                     <label>Dive Time</label>
                     <div class="input-group">
-                        <input type="text" class="form-control" id="timeDive" disabled>
+                        <input type="number" class="form-control" id="timeDive" value="40" disabled>
                         <div class="input-group-append">
                             <span class="input-group-text">min</span>
                         </div>
                     </div>
                 </td>
-                <td class="border-dark border-bottom">
+                <td>
                     <label>Exit Time</label>
                     <div class="input-group">
-                        <input tabindex="2" type="time" class="form-control" id="timeExit" value="10:00">
+                        <input tabindex="2" type="time" class="form-control" id="timeExit" value="10:40">
                     </div>
                 </td>
             </tr>
             <tr>
-                <td>
+                <td class="b-top b-right">
                     <label>Top Temp.</label>
                     <div class="input-group">
-                        <input tabindex="3" type="number" class="form-control" id="tempTop" value="20" min="0" max="40">
+                        <input tabindex="3" type="number" class="form-control" id="tempTop" value="26" min="0" max="40">
                         <div class="input-group-append">
                             <span class="input-group-text">℃</span>
                         </div>
                     </div>
                 </td>
-                <td class="border-dark border-left border-right">
+                <td>
                     <label>Average Depth</label>
                     <div class="input-group">
                         <input tabindex="5" type="number" class="form-control" id="tempTop" value="10.0" min="1" max="40" step="0.1">
@@ -46,10 +46,10 @@
                         </div>
                     </div>
                 </td>
-                <td>
+                <td class="b-left b-top">
                     <label>Entry Pressure</label>
                     <div class="input-group">
-                        <input tabindex="7" type="number" class="form-control" id="tempTop" value="20" min="0" max="40">
+                        <input tabindex="7" type="number" class="form-control" id="tempTop" value="200" min="0" max="40">
                         <div class="input-group-append">
                             <span class="input-group-text">atm</span>
                         </div>
@@ -66,10 +66,10 @@
                         </div>
                     </div>
                 </td>
-                <td class="border-dark border-left border-right border-bottom">
+                <td class="b-left b-right b-bottom">
                     <label>Max Depth</label>
                     <div class="input-group">
-                        <input tabindex="6" type="number" class="form-control" id="tempTop" value="10.0" min="1" max="40" step="0.1">
+                        <input tabindex="6" type="number" class="form-control" id="tempTop" value="20.0" min="1" max="40" step="0.1">
                         <div class="input-group-append">
                             <span class="input-group-text">m</span>
                         </div>
@@ -78,7 +78,7 @@
                 <td>
                     <label>Exit Pressure</label>
                     <div class="input-group">
-                        <input tabindex="8" type="number" class="form-control" id="tempTop" value="20" min="0" max="40">
+                        <input tabindex="8" type="number" class="form-control" id="tempTop" value="100" min="0" max="40">
                         <div class="input-group-append">
                             <span class="input-group-text">atm</span>
                         </div>

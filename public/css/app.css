@@ -10504,3 +10504,19 @@ a.text-dark:focus {
   width: 33.3%;
 }
 
+.table-dive-diagram .b-top {
+  border-top: solid 3px;
+}
+
+.table-dive-diagram .b-right {
+  border-right: solid 3px;
+}
+
+.table-dive-diagram .b-bottom {
+  border-bottom: solid 3px;
+}
+
+.table-dive-diagram .b-left {
+  border-left: solid 3px;
+}
+

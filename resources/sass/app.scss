@@ -19,4 +19,18 @@
     padding: 5px;
     width: 33.3%;
   }
+  $border-width: 3px;
+  $border-style: solid;
+  .b-top {
+    border-top: $border-style $border-width;
+  }
+  .b-right {
+    border-right: $border-style $border-width;
+  }
+  .b-bottom {
+    border-bottom: $border-style $border-width;
+  }
+  .b-left {
+    border-left: $border-style $border-width;
+  }
 }
