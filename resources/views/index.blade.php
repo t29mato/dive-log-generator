@@ -105,19 +105,26 @@
                 <td>
                     <label>Date</label>
                     <div class="input-group">
-                        <input type="text" class="form-control" id="dateDiving" name="date" value="">
+                        <input type="date" class="form-control" id="content" name="content" value="">
                     </div>
                 </td>
                 <td>
                     <label>Weather</label>
                     <div class="input-group">
-                        <input type="text" class="form-control" id="weather" name="weather" value="">
+                        <select class="form-control" name="weather" id="weather">
+                            <option value="">Select</option>
+                            <option value="晴れ">晴れ</option>
+                            <option value="曇り">曇り</option>
+                            <option value="雨">雨</option>
+                            <option value="雪">雪</option>
+                            <option value="雷">雷</option>
+                        </select>
                     </div>
                 </td>
                 <td>
                     <label>Temperature</label>
                     <div class="input-group">
-                        <input type="text" class="form-control" id="temperature" name="temperature" value="">
+                        <input type="number" class="form-control" id="temperature" name="temperature" value="" min="0" max="40" step="0.1">
                     </div>
                 </td>
             </tr>
