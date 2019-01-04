@@ -17,33 +17,23 @@ class ImageGeneratorController extends Controller
         $this->divingLog = $divingLog;
     }
 
-    public function index()
+    public function index(DivingLog $divingLog)
     {
-        return view('index');
+        return view('index', ['divingLog' => $divingLog]);
     }
 
     public function generate(Request $request)
     {
-        $this->divingLog->setDivingLog(
-            $request->timeEntry,
-            $request->timeExit,
-            $request->timeDive,
-            $request->tempTop,
-            $request->tempBottom,
-            $request->depthAvg,
-            $request->depthMax,
-            $request->pressureEntry,
-            $request->pressureExit
-        );
+        \Log::debug($request);
+        $this->divingLog->setDivingLog($request);
         $image = $this->imageGeneratorService->generate($this->divingLog);
         $filename = 'photos/temp/' . uniqid() . '.jpg';
         $image->save($filename);
         $imageUrl = url($filename);
 
-
         return view('index',[
-            'hoge' => 'hoge',
-            'imageUrl' => $imageUrl
+            'imageUrl' => $imageUrl,
+            'divingLog' => $this->divingLog,
         ]);
     }
 }

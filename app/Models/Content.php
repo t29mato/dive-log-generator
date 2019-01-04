@@ -4,7 +4,7 @@ namespace App;
 
 use Intervention\Image\Facades\Image;
 
-class Date extends Text
+class Content extends Text
 {
     public function __construct()
     {

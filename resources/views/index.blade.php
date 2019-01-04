@@ -13,13 +13,13 @@
                 <td>
                     <label>Entry Time</label>
                     <div class="input-group">
-                        <input tabindex="1" type="time" class="form-control" id="timeEntry" name="timeEntry" value="10:00">
+                        <input tabindex="1" type="time" class="form-control" id="timeEntry" name="timeEntry" value="{{ $divingLog->timeEntry }}">
                     </div>
                 </td>
                 <td>
                     <label>Dive Time</label>
                     <div class="input-group">
-                        <input type="number" class="form-control" id="timeDive" name="timeDive" value="40" readonly="readonly">
+                        <input type="number" class="form-control" id="timeDive" name="timeDive" value="{{ old('timeDive') }}" readonly="readonly">
                         <div class="input-group-append">
                             <span class="input-group-text">min</span>
                         </div>
@@ -105,7 +105,7 @@
                 <td>
                     <label>Date</label>
                     <div class="input-group">
-                        <input type="date" class="form-control" id="content" name="content" value="">
+                        <input type="date" class="form-control" id="dateDiving" name="dateDiving" value="">
                     </div>
                 </td>
                 <td>
