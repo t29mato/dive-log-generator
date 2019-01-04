@@ -1,7 +1,16 @@
 @extends('common')
 
 @section('content')
-<form>
+
+{{ $hoge }}
+{{ $imageUrl }}
+
+@if(isset($imageUrl))
+aaa
+<img src="{{ asset($imageUrl) }}">
+@endif
+<form action="{{ route('generate') }}" method="post">
+{{ csrf_field() }}
     <table class="table-dive-diagram">
         <tbody>
             <tr>
@@ -49,7 +58,7 @@
                 <td class="b-left b-top">
                     <label>Entry Pressure</label>
                     <div class="input-group">
-                        <input tabindex="7" type="number" class="form-control" id="tempTop" value="200" min="0" max="40">
+                        <input tabindex="7" type="number" class="form-control" id="tempTop" value="200" min="0" max="300">
                         <div class="input-group-append">
                             <span class="input-group-text">atm</span>
                         </div>
@@ -78,7 +87,7 @@
                 <td>
                     <label>Exit Pressure</label>
                     <div class="input-group">
-                        <input tabindex="8" type="number" class="form-control" id="tempTop" value="100" min="0" max="40">
+                        <input tabindex="8" type="number" class="form-control" id="tempTop" value="100" min="0" max="300">
                         <div class="input-group-append">
                             <span class="input-group-text">atm</span>
                         </div>

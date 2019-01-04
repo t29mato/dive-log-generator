@@ -12,5 +12,5 @@
 */
 
 // usage inside a laravel route
-Route::get('/', 'ImageGeneratorController@index');
-Route::post('/', 'ImageGeneratorController@generate');
+Route::get('/', 'ImageGeneratorController@index')->name('index');
+Route::post('/', 'ImageGeneratorController@generate')->name('generate');

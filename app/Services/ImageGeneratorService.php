@@ -36,7 +36,8 @@ class ImageGeneratorService
         $this->place = $place->getFont();
     }
 
-    public function generate() {
+    public function generate(): \Intervention\Image\Image
+    {
         $this->photo = \Image::make($this->photoUrl)->heighten($this->sizeX);
         $this->photo->crop($this->sizeX, $this->sizeY);
 
