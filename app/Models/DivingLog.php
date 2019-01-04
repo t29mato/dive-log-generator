@@ -2,20 +2,26 @@
 
 namespace App;
 
-class Log
+class DivingLog
 {
-    protected $timeEntry;
-    protected $timeExit;
-    protected $tempTop;
-    protected $tempBottom;
-    protected $depthAvg;
-    protected $depthMax;
-    protected $pressureEntry;
-    protected $pressureExit;
+    public $timeEntry;
+    public $timeExit;
+    public $timeDive;
+    public $tempTop;
+    public $tempBottom;
+    public $depthAvg;
+    public $depthMax;
+    public $pressureEntry;
+    public $pressureExit;
 
-    public function __construct(
+    public function __construct()
+    {
+        //
+    }
+    public function setDivingLog(
         $timeEntry,
         $timeExit,
+        $timeDive,
         $tempTop,
         $tempBottom,
         $depthAvg,
@@ -26,6 +32,7 @@ class Log
     {
         $this->timeEntry = $timeEntry;
         $this->timeExit = $timeExit;
+        $this->timeDive = $timeDive;
         $this->tempTop = $tempTop;
         $this->tempBottom = $tempBottom;
         $this->depthAvg = $depthAvg;

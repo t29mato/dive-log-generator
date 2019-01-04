@@ -2,12 +2,8 @@
 
 @section('content')
 
-{{ $hoge }}
-{{ $imageUrl }}
-
 @if(isset($imageUrl))
-aaa
-<img src="{{ asset($imageUrl) }}">
+<img src="{{ url($imageUrl) }}" class="img-fluid" width="500">
 @endif
 <form action="{{ route('generate') }}" method="post">
 {{ csrf_field() }}
@@ -17,13 +13,13 @@ aaa
                 <td>
                     <label>Entry Time</label>
                     <div class="input-group">
-                        <input tabindex="1" type="time" class="form-control" id="timeEntry" value="10:00">
+                        <input tabindex="1" type="time" class="form-control" id="timeEntry" name="timeEntry" value="10:00">
                     </div>
                 </td>
                 <td>
                     <label>Dive Time</label>
                     <div class="input-group">
-                        <input type="number" class="form-control" id="timeDive" value="40" disabled>
+                        <input type="number" class="form-control" id="timeDive" name="timeDive" value="40" readonly="readonly">
                         <div class="input-group-append">
                             <span class="input-group-text">min</span>
                         </div>
@@ -32,7 +28,7 @@ aaa
                 <td>
                     <label>Exit Time</label>
                     <div class="input-group">
-                        <input tabindex="2" type="time" class="form-control" id="timeExit" value="10:40">
+                        <input tabindex="2" type="time" class="form-control" id="timeExit" name="timeExit" value="10:40">
                     </div>
                 </td>
             </tr>
@@ -40,7 +36,7 @@ aaa
                 <td class="b-top b-right">
                     <label>Top Temp.</label>
                     <div class="input-group">
-                        <input tabindex="3" type="number" class="form-control" id="tempTop" value="26" min="0" max="40">
+                        <input tabindex="3" type="number" class="form-control" id="tempTop" name="tempTop" value="26" min="0" max="40">
                         <div class="input-group-append">
                             <span class="input-group-text">℃</span>
                         </div>
@@ -49,7 +45,7 @@ aaa
                 <td>
                     <label>Average Depth</label>
                     <div class="input-group">
-                        <input tabindex="5" type="number" class="form-control" id="tempTop" value="10.0" min="1" max="40" step="0.1">
+                        <input tabindex="5" type="number" class="form-control" id="depthAverage" name="depthAverage" value="10.0" min="1" max="40" step="0.1">
                         <div class="input-group-append">
                             <span class="input-group-text">m</span>
                         </div>
@@ -58,7 +54,7 @@ aaa
                 <td class="b-left b-top">
                     <label>Entry Pressure</label>
                     <div class="input-group">
-                        <input tabindex="7" type="number" class="form-control" id="tempTop" value="200" min="0" max="300">
+                        <input tabindex="7" type="number" class="form-control" id="pressureEntry" name="pressureEntry" value="200" min="0" max="300">
                         <div class="input-group-append">
                             <span class="input-group-text">atm</span>
                         </div>
@@ -69,7 +65,7 @@ aaa
                 <td>
                     <label>Bottom Temp.</label>
                     <div class="input-group">
-                        <input tabindex="4" type="number" class="form-control" id="tempTop" value="20" min="0" max="40">
+                        <input tabindex="4" type="number" class="form-control" id="tempBottom" name="tempBottom" value="20" min="0" max="40">
                         <div class="input-group-append">
                             <span class="input-group-text">℃</span>
                         </div>
@@ -78,7 +74,7 @@ aaa
                 <td class="b-left b-right b-bottom">
                     <label>Max Depth</label>
                     <div class="input-group">
-                        <input tabindex="6" type="number" class="form-control" id="tempTop" value="20.0" min="1" max="40" step="0.1">
+                        <input tabindex="6" type="number" class="form-control" id="depthMax" name="depthMax" value="20.0" min="1" max="40" step="0.1">
                         <div class="input-group-append">
                             <span class="input-group-text">m</span>
                         </div>
@@ -87,7 +83,7 @@ aaa
                 <td>
                     <label>Exit Pressure</label>
                     <div class="input-group">
-                        <input tabindex="8" type="number" class="form-control" id="tempTop" value="100" min="0" max="300">
+                        <input tabindex="8" type="number" class="form-control" id="pressureExit" name="pressureExit" value="100" min="0" max="300">
                         <div class="input-group-append">
                             <span class="input-group-text">atm</span>
                         </div>
