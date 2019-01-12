@@ -2,6 +2,8 @@
 
 namespace App;
 
+use Illuminate\Support\Facades\Input;
+
 class DivingLog
 {
     public $timeEntry;
@@ -17,11 +19,12 @@ class DivingLog
     public $weather;
     public $temperature;
     public $place;
+    public $photo;
 
-    public function __construct()
-    {
-        //
-    }
+    public static $rules = array(
+        'photo' => 'required|image|'
+    );
+
     public function setDivingLog($request)
     {
         $this->timeEntry = $this->issetRequest($request->timeEntry);
@@ -39,6 +42,7 @@ class DivingLog
         $this->weather = $this->issetRequest($request->weather);
         $this->temperature = $this->issetRequest($request->temperature);
         $this->place = $this->issetRequest($request->place);
+        $this->photo = $this->issetRequest(Input::file('photo'));
     }
     private function formatDate($date) {
         if (!isset($date)) {

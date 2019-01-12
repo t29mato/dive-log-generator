@@ -5,7 +5,7 @@
 @if(isset($imageUrl))
 <img src="{{ url($imageUrl) }}" class="img-fluid" width="500">
 @endif
-<form action="{{ route('generate') }}" method="post">
+<form action="{{ route('generate') }}" method="post" enctype="multipart/form-data">
     {{ csrf_field() }}
     <table class="table-dive-diagram">
         <tbody>
@@ -19,7 +19,8 @@
                 <td>
                     <label>Dive Time</label>
                     <div class="input-group">
-                        <input type="number" class="form-control" id="timeDive" name="timeDive" value="{{ old('timeDive') }}" readonly="readonly">
+                        <input type="number" class="form-control" id="timeDive" name="timeDive" value="{{ old('timeDive') }}"
+                            readonly="readonly">
                         <div class="input-group-append">
                             <span class="input-group-text">min</span>
                         </div>
@@ -124,7 +125,8 @@
                 <td>
                     <label>Temperature</label>
                     <div class="input-group">
-                        <input type="number" class="form-control" id="temperature" name="temperature" value="" min="0" max="40" step="0.1">
+                        <input type="number" class="form-control" id="temperature" name="temperature" value="" min="0"
+                            max="40" step="0.1">
                     </div>
                 </td>
             </tr>
@@ -137,6 +139,13 @@
                 </td>
             </tr>
         </tbody>
+    </table>
+    <hr>
+    <table>
+        <label>Photo</label>
+        <div class="input-group">
+            <input type="file" id="photo" name="photo" required>
+        </div>
     </table>
     <button type="submit" class="btn btn-primary">Submit</button>
 </form>

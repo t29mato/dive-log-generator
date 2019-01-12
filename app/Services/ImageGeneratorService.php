@@ -14,7 +14,6 @@ class ImageGeneratorService
 {
     private $sizeX;
     private $sizeY;
-    private $photoUrl;
     private $photo;
 
     public function __construct(
@@ -28,7 +27,6 @@ class ImageGeneratorService
     {
         $this->sizeX = 1200;
         $this->sizeY = 1200;
-        $this->photoUrl = 'photos/IMG_0714.jpg';
         $this->line = $line->getFont();
         $this->label = $label->getFont();
         $this->value = $value->getFont();
@@ -39,7 +37,7 @@ class ImageGeneratorService
 
     public function generate(DivingLog $divingLog): \Intervention\Image\Image
     {
-        $this->photo = \Image::make($this->photoUrl)->heighten($this->sizeX);
+        $this->photo = \Image::make($divingLog->photo)->heighten($this->sizeX);
         $this->photo->crop($this->sizeX, $this->sizeY);
 
         /**
