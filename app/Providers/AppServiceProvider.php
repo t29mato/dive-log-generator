@@ -13,8 +13,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        // 検証環境もしくは本番環境の際はhttpsを強制する
-        if (\App::environment('staging') || \App::environment('production')) {
+        // 本番環境の際はhttpsを強制する
+        if (\App::environment('production')) {
             \URL::forceScheme('https');
         }
     }
