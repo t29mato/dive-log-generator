@@ -35,7 +35,7 @@ class ImageGeneratorService
         $this->place = $place->getFont();
     }
 
-    public function generate(DivingLog $divingLog): \Intervention\Image\Image
+    public function generate(DivingLog $divingLog)
     {
         $this->photo = \Image::make($divingLog->photo)->heighten($this->sizeX);
         $this->photo->crop($this->sizeX, $this->sizeY);
@@ -123,6 +123,15 @@ class ImageGeneratorService
 
         // Attach Line to the Photo.
         $this->photo->insert($this->line, 'top-left', 30, 30);
-        return $this->photo;
+
+        $path = 'storage/photos/temp/';
+        $filename = $path . uniqid() . '.jpg';
+        if (!file_exists($path)) {
+            mkdir($path, 755, true);
+        }
+        $this->photo->save($filename);
+        $imageUrl = url($filename);
+
+        return $imageUrl;
     }
 }

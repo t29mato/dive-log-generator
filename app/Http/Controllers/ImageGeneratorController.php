@@ -26,10 +26,7 @@ class ImageGeneratorController extends Controller
     {
         $this->validate($request, DivingLog::$rules);
         $this->divingLog->setDivingLog($request);
-        $image = $this->imageGeneratorService->generate($this->divingLog);
-        $filename = 'storage/photos/temp/' . uniqid() . '.jpg';
-        $image->save($filename);
-        $imageUrl = url($filename);
+        $imageUrl = $this->imageGeneratorService->generate($this->divingLog);
 
         return view('index',[
             'imageUrl' => $imageUrl,
