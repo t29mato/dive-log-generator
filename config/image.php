@@ -15,6 +15,7 @@ return [
     |
     */
 
+    // Line width is not supported by GD driver. so I selected GD driver.
     'driver' => 'imagick'
 
 ];
