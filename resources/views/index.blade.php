@@ -147,6 +147,6 @@
             <input type="file" id="photo" name="photo" required>
         </div>
     </table>
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <button type="submit" class="btn btn-primary">Generate</button>
 </form>
 @endsection
