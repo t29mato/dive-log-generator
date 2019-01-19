@@ -27,12 +27,12 @@ class ImageGeneratorService
     {
         $this->sizeX = 1200;
         $this->sizeY = 1200;
-        $this->line = $line->getFont();
-        $this->label = $label->getFont();
-        $this->value = $value->getFont();
-        $this->unit = $unit->getFont();
-        $this->content = $content->getFont();
-        $this->place = $place->getFont();
+        $this->line = $line;
+        $this->label = $label;
+        $this->value = $value;
+        $this->unit = $unit;
+        $this->content = $content;
+        $this->place = $place;
     }
 
     public function generate(DivingLog $divingLog)
@@ -40,59 +40,66 @@ class ImageGeneratorService
         $this->photo = \Image::make($divingLog->photo)->heighten($this->sizeX);
         $this->photo->crop($this->sizeX, $this->sizeY);
 
-        /**
-         * When Data exists, display data, label and unit.
-         */
+        if (isset($divingLog->color)) {
+            $this->line->setColor($divingLog->color);
+            $this->label->setColor($divingLog->color);
+            $this->value->setColor($divingLog->color);
+            $this->unit->setColor($divingLog->color);
+            $this->content->setColor($divingLog->color);
+            $this->place->setColor($divingLog->color);
+        }
+
+        $lineCanvas = $this->line->generateCanvas();
 
         if (isset($divingLog->timeEntry)) {
-            $this->line->text($divingLog->timeEntry, 100, 40, $this->value);
+            $lineCanvas->text($divingLog->timeEntry, 100, 40, $this->value->getFont());
         }
 
         if (isset($divingLog->timeExit)) {
-            $this->line->text($divingLog->timeExit, 360, 40, $this->value);
+            $lineCanvas->text($divingLog->timeExit, 360, 40, $this->value->getFont());
         }
 
         if (isset($divingLog->timeEntry) && isset($divingLog->timeExit)) {
             if ($divingLog->timeDive !== 0) {
-                $this->line->text($divingLog->timeDive, 190, 40, $this->value);
-                $this->line->text('min', 240, 40, $this->unit);
+                $lineCanvas->text($divingLog->timeDive, 190, 40, $this->value->getFont());
+                $lineCanvas->text('min', 240, 40, $this->unit->getFont());
             }
         }
 
         if (isset($divingLog->tempTop)) {
-            $this->line->text('top', 10, 90, $this->label);
-            $this->line->text($divingLog->tempTop, 70, 130, $this->value);
-            $this->line->text('℃', 100, 130, $this->unit);
+            $lineCanvas->text('top', 10, 90, $this->label->getFont());
+            $lineCanvas->text($divingLog->tempTop, 70, 130, $this->value->getFont());
+            $lineCanvas->text('℃', 100, 130, $this->unit->getFont());
         }
 
         if (isset($divingLog->tempBottom)) {
-            $this->line->text('bottom', 10, 170, $this->label);
-            $this->line->text($divingLog->tempBottom, 70, 210, $this->value);
-            $this->line->text('℃', 100, 210, $this->unit);
+            $lineCanvas->text('bottom', 10, 170, $this->label->getFont());
+            $lineCanvas->text($divingLog->tempBottom, 70, 210, $this->value->getFont());
+            $lineCanvas->text('℃', 100, 210, $this->unit->getFont());
         }
 
         if (isset($divingLog->depthAvg)) {
-            $this->line->text('avg.', 140, 90, $this->label);
-            $this->line->text($divingLog->depthAvg, 220, 130, $this->value);
-            $this->line->text('m', 250, 130, $this->unit);
+            $lineCanvas->text('avg.', 140, 90, $this->label->getFont());
+            $lineCanvas->text($divingLog->depthAvg, 220, 130, $this->value->getFont());
+            $lineCanvas->text('m', 250, 130, $this->unit->getFont());
         }
 
         if (isset($divingLog->depthMax)) {
-            $this->line->text('max', 140, 170, $this->label);
-            $this->line->text($divingLog->depthMax, 220, 210, $this->value);
-            $this->line->text('m', 250, 210, $this->unit);
+            $lineCanvas->text('max', 140, 170, $this->label->getFont());
+            $lineCanvas->text($divingLog->depthMax, 220, 210, $this->value->getFont());
+            $lineCanvas->text('m', 250, 210, $this->unit->getFont());
         }
 
         if (isset($divingLog->pressureEntry)) {
-            $this->line->text('entry', 270, 90, $this->label);
-            $this->line->text($divingLog->pressureEntry, 340, 130, $this->value);
-            $this->line->text('bar', 380, 130, $this->unit);
+            $lineCanvas->text('entry', 270, 90, $this->label->getFont());
+            $lineCanvas->text($divingLog->pressureEntry, 340, 130, $this->value->getFont());
+            $lineCanvas->text('bar', 380, 130, $this->unit->getFont());
         }
 
         if (isset($divingLog->pressureExit)) {
-            $this->line->text('exit', 270, 170, $this->label);
-            $this->line->text($divingLog->pressureExit, 340, 210, $this->value);
-            $this->line->text('bar', 380, 210, $this->unit);
+            $lineCanvas->text('exit', 270, 170, $this->label->getFont());
+            $lineCanvas->text($divingLog->pressureExit, 340, 210, $this->value->getFont());
+            $lineCanvas->text('bar', 380, 210, $this->unit->getFont());
         }
 
         // TODO: refacotring
@@ -113,16 +120,16 @@ class ImageGeneratorService
         }
 
         if (isset($text)) {
-            $this->photo->text($text, 30, 1170, $this->content);
+            $this->photo->text($text, 30, 1170, $this->content->getFont());
         }
 
 
         if (isset($divingLog->place)) {
-            $this->photo->text($divingLog->place, 1170, 1170, $this->place);
+            $this->photo->text($divingLog->place, 1170, 1170, $this->place->getFont());
         }
 
         // Attach Line to the Photo.
-        $this->photo->insert($this->line, 'top-left', 30, 30);
+        $this->photo->insert($lineCanvas, 'top-left', 30, 30);
 
         $path = 'storage/photos/temp/';
         $filename = $path . uniqid() . '.jpg';

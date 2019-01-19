@@ -20,6 +20,7 @@ class DivingLog
     public $temperature;
     public $place;
     public $photo;
+    public $color;
 
     public static $rules = array(
         'photo' => 'required|image|'
@@ -43,6 +44,7 @@ class DivingLog
         $this->temperature = $this->issetRequest($request->temperature);
         $this->place = $this->issetRequest($request->place);
         $this->photo = $this->issetRequest(Input::file('photo'));
+        $this->color = $this->issetRequest($request->color);
     }
     private function formatDate($date) {
         if (!isset($date)) {

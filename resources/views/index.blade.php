@@ -146,6 +146,10 @@
         <div class="input-group">
             <input type="file" id="photo" name="photo" required>
         </div>
+        <label>Log Color</label>
+        <div class="input-group">
+            <input type="color" id="color" name="color" required>
+        </div>
     </table>
     <button type="submit" class="btn btn-primary">Generate</button>
 </form>

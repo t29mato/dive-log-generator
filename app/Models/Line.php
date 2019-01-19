@@ -29,7 +29,7 @@ class Line
         $this->width = 3;
     }
 
-    public function getFont(): \Intervention\Image\Image
+    public function generateCanvas(): \Intervention\Image\Image
     {
         $canvas = Image::canvas(
             $this->canvas['width'],
@@ -48,5 +48,9 @@ class Line
             );
         }
         return $canvas;
+    }
+
+    public function setColor(string $color) {
+        $this->color = $color;
     }
 }
