@@ -11,6 +11,8 @@
 |
 */
 
-// usage inside a laravel route
-Route::get('/', 'ImageGeneratorController@index')->name('index');
-Route::post('/', 'ImageGeneratorController@generate')->name('generate');
+Route::get('/', 'HomeController@index')->name('home');
+Route::get('/generate', 'GeneratorController@index')->name('generate');
+Route::post('/generate', 'GeneratorController@generate');
+
+Route::post('/photo', 'GeneratorController@upload');

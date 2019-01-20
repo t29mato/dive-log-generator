@@ -7,7 +7,7 @@ use App\Service\ImageGeneratorService;
 use App\Models\DivingLog;
 use Illuminate\Support\Facades\Storage;
 
-class ImageGeneratorController extends Controller
+class GeneratorController extends Controller
 {
     protected $imageGeneratorService;
     protected $divingLog;
@@ -19,7 +19,7 @@ class ImageGeneratorController extends Controller
 
     public function index(Request $oldInput)
     {
-        return view('index', ['oldInput' => $oldInput]);
+        return view('generate', ['oldInput' => $oldInput]);
     }
 
     public function generate(Request $request)
@@ -29,9 +29,14 @@ class ImageGeneratorController extends Controller
         $imageUrl = $this->imageGeneratorService->generate($this->divingLog);
         $oldInput = $request;
 
-        return view('index',[
+        return view('generate',[
             'imageUrl' => $imageUrl,
             'oldInput' => $oldInput,
         ]);
+    }
+
+    public function upload(Request $request)
+    {
+
     }
 }

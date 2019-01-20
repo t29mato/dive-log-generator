@@ -10,7 +10,7 @@ abstract class InterventionImage
 
     public function __construct()
     {
-        $this->color = '#000000';
+        $this->color = '#fff';
     }
 
     public function setColor(string $color)

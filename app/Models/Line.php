@@ -17,7 +17,7 @@ class Line extends InterventionImage
         $this->canvas = [
             'width' => 390,
             'height' => 250,
-            'color' => '#000'
+            'color' => $this->getColor()
         ];
         $this->positions = [
             ['posX' => 0, 'posY' => 50],
