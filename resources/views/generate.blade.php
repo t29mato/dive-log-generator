@@ -5,7 +5,7 @@
 @if(isset($imageUrl))
 <p class="text-success">SUCCESS!</p>
 <img src="{{ $imageUrl }}" class="img-fluid mb-3" width="500"><br>
-<a href="{{ $imageUrl }}" download="PhotoDiveLog_{{ $oldInput->dateDiving }}" class="btn btn-secondary mb-1">フォトダイブログをダウンロード</a>
+<a href="{{ $imageUrl }}" download="PhotoDiveLog_{{ $oldInput->dateDiving }}" class="btn btn-secondary mb-1">フォトログをダウンロード</a>
 <p>※ 条件変更は下から</p>
 @endif
 <form action="{{ route('generate') }}" method="post" enctype="multipart/form-data" class="p-2">
@@ -150,6 +150,6 @@
             </tr>
         </tbody>
     </table>
-    <button type="submit" class="btn btn-primary">フォトダイブログを生成する</button>
+    <button type="submit" class="btn btn-primary">フォトログを生成する</button>
 </form>
 @endsection
