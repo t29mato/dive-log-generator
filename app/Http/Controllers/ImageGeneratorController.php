@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\ImageGeneratorService;
-use App\DivingLog;
+use App\Service\ImageGeneratorService;
+use App\Models\DivingLog;
 use Illuminate\Support\Facades\Storage;
 
 class ImageGeneratorController extends Controller

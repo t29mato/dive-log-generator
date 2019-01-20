@@ -19,8 +19,7 @@
                 <td>
                     <label>Dive Time</label>
                     <div class="input-group">
-                        <input type="number" class="form-control" id="timeDive" name="timeDive" value="{{ old('timeDive') }}"
-                            readonly="readonly">
+                        <input type="number" class="form-control" id="timeDive" name="timeDive" readonly="readonly">
                         <div class="input-group-append">
                             <span class="input-group-text">min</span>
                         </div>

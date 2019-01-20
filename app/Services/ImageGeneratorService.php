@@ -1,20 +1,20 @@
 <?php
-namespace App;
+namespace App\Service;
 
-use App\Line;
-use App\Label;
-use App\Value;
-use App\Unit;
-use App\Content;
-use App\Place;
-use App\DivingLog;
+use App\Models\Line;
+use App\Models\Label;
+use App\Models\Value;
+use App\Models\Unit;
+use App\Models\Content;
+use App\Models\Place;
+use App\Models\DivingLog;
 use Intervention\Image\Facades\Image;
 
 class ImageGeneratorService
 {
     private $sizeX;
     private $sizeY;
-    private $photo;
+    private $photoCanvas;
     private $lineCanvas;
 
     public function __construct(
@@ -38,8 +38,8 @@ class ImageGeneratorService
 
     public function generate(DivingLog $divingLog)
     {
-        $this->photo = \Image::make($divingLog->photo)->heighten($this->sizeX);
-        $this->photo->crop($this->sizeX, $this->sizeY);
+        $this->photoCanvas = \Image::make($divingLog->photo)->heighten($this->sizeX);
+        $this->photoCanvas->crop($this->sizeX, $this->sizeY);
 
         if (isset($divingLog->color)) {
             $this->line->setColor($divingLog->color);
@@ -60,11 +60,10 @@ class ImageGeneratorService
             $this->lineCanvas->text($divingLog->timeExit, 360, 40, $this->value->getFont());
         }
 
-        if (isset($divingLog->timeEntry) && isset($divingLog->timeExit)) {
-            if ($divingLog->timeDive !== 0) {
-                $this->lineCanvas->text($divingLog->timeDive, 190, 40, $this->value->getFont());
-                $this->lineCanvas->text('min', 240, 40, $this->unit->getFont());
-            }
+        if (isset($divingLog->timeDive) && is_numeric($divingLog->timeDive)) {
+            \Log::debug($divingLog->timeDive);
+            $this->lineCanvas->text($divingLog->timeDive, 190, 40, $this->value->getFont());
+            $this->lineCanvas->text('min', 240, 40, $this->unit->getFont());
         }
 
         if (isset($divingLog->tempTop)) {
@@ -121,23 +120,23 @@ class ImageGeneratorService
         }
 
         if (isset($text)) {
-            $this->photo->text($text, 30, 1170, $this->content->getFont());
+            $this->photoCanvas->text($text, 30, 1170, $this->content->getFont());
         }
 
 
         if (isset($divingLog->place)) {
-            $this->photo->text($divingLog->place, 1170, 1170, $this->place->getFont());
+            $this->photoCanvas->text($divingLog->place, 1170, 1170, $this->place->getFont());
         }
 
         // Attach Line to the Photo.
-        $this->photo->insert($this->lineCanvas, 'top-left', 30, 30);
+        $this->photoCanvas->insert($this->lineCanvas, 'top-left', 30, 30);
 
         $path = 'storage/photos/temp/';
         $filename = $path . uniqid() . '.jpg';
         if (!file_exists($path)) {
             mkdir($path, 755, true);
         }
-        $this->photo->save($filename);
+        $this->photoCanvas->save($filename);
         $imageUrl = url($filename);
 
         return $imageUrl;

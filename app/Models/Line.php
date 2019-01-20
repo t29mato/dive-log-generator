@@ -1,17 +1,19 @@
 <?php
 
-namespace App;
-use Intervention\Image\Facades\Image;
+namespace App\Models;
 
-class Line
+use Intervention\Image\Facades\Image;
+use App\Models\InterventionImage;
+
+class Line extends InterventionImage
 {
     private $canvas;
     private $positions;
-    private $color;
     private $width;
 
     public function __construct()
     {
+        parent::__construct();
         $this->canvas = [
             'width' => 390,
             'height' => 250,
@@ -25,7 +27,6 @@ class Line
             ['posX' => 260, 'posY' => 50],
             ['posX' => 390, 'posY' => 50],
         ];
-        $this->color = '#fff';
         $this->width = 3;
     }
 
@@ -42,15 +43,11 @@ class Line
                 $this->positions[$i+1]['posX'],
                 $this->positions[$i+1]['posY'],
                 function ($draw) {
-                    $draw->color($this->color);
+                    $draw->color($this->getColor());
                     $draw->width($this->width);
                 }
             );
         }
         return $canvas;
-    }
-
-    public function setColor(string $color) {
-        $this->color = $color;
     }
 }
