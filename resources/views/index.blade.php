@@ -105,13 +105,13 @@
                 <td>
                     <label>Date</label>
                     <div class="input-group">
-                        <input type="date" class="form-control" id="dateDiving" name="dateDiving" value="">
+                        <input tabindex="9" type="date" class="form-control" id="dateDiving" name="dateDiving" value="">
                     </div>
                 </td>
                 <td>
                     <label>Weather</label>
                     <div class="input-group">
-                        <select class="form-control" name="weather" id="weather">
+                        <select tabindex="10" class="form-control" name="weather" id="weather">
                             <option value="">Select</option>
                             <option value="晴れ">晴れ</option>
                             <option value="曇り">曇り</option>
@@ -124,7 +124,7 @@
                 <td>
                     <label>Temperature</label>
                     <div class="input-group">
-                        <input type="number" class="form-control" id="temperature" name="temperature" value="" min="0"
+                        <input tabindex="11" type="number" class="form-control" id="temperature" name="temperature" value="" min="0"
                             max="40" step="0.1">
                     </div>
                 </td>
@@ -133,7 +133,7 @@
                 <td colspan="3">
                     <label>Place</label>
                     <div class="input-group">
-                        <input type="text" class="form-control" id="place" name="place" value="">
+                        <input tabindex="12" type="text" class="form-control" id="place" name="place" value="">
                     </div>
                 </td>
             </tr>
@@ -143,11 +143,11 @@
     <table>
         <label>Photo</label>
         <div class="input-group">
-            <input type="file" id="photo" name="photo" required>
+            <input tabindex="13" type="file" id="photo" name="photo" required>
         </div>
         <label>Log Color</label>
         <div class="input-group">
-            <input type="color" id="color" name="color" required>
+            <input tabindex="14" type="color" id="color" name="color" required>
         </div>
     </table>
     <button type="submit" class="btn btn-primary">Generate</button>
