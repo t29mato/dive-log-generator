@@ -17,9 +17,9 @@ class ImageGeneratorController extends Controller
         $this->divingLog = $divingLog;
     }
 
-    public function index(DivingLog $divingLog)
+    public function index(Request $oldInput)
     {
-        return view('index', ['divingLog' => $divingLog]);
+        return view('index', ['oldInput' => $oldInput]);
     }
 
     public function generate(Request $request)
@@ -27,10 +27,11 @@ class ImageGeneratorController extends Controller
         $this->validate($request, DivingLog::$rules);
         $this->divingLog->setDivingLog($request);
         $imageUrl = $this->imageGeneratorService->generate($this->divingLog);
+        $oldInput = $request;
 
         return view('index',[
             'imageUrl' => $imageUrl,
-            'divingLog' => $this->divingLog,
+            'oldInput' => $oldInput,
         ]);
     }
 }
