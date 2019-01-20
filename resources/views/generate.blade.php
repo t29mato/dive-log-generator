@@ -47,7 +47,7 @@
                     <label>水温 (水面)</label>
                     <div class="input-group">
                         <input tabindex="3" type="number" class="form-control" id="tempTop" name="tempTop" value="{{ $oldInput->tempTop }}"
-                            min="0" max="40">
+                            min="0" max="40" step="0.1">
                         <div class="input-group-append">
                             <span class="input-group-text">℃</span>
                         </div>
@@ -67,7 +67,7 @@
                     <label>開始圧</label>
                     <div class="input-group">
                         <input tabindex="7" type="number" class="form-control" id="pressureEntry" name="pressureEntry"
-                            value="{{ $oldInput->pressureEntry }}" min="0" max="300">
+                            value="{{ $oldInput->pressureEntry }}" min="0" max="300" step="10">
                         <div class="input-group-append">
                             <span class="input-group-text">atm</span>
                         </div>
@@ -79,7 +79,7 @@
                     <label>水温 (水底)</label>
                     <div class="input-group">
                         <input tabindex="4" type="number" class="form-control" id="tempBottom" name="tempBottom" value="{{ $oldInput->tempBottom }}"
-                            min="0" max="40">
+                            min="0" max="40" step="0.1">
                         <div class="input-group-append">
                             <span class="input-group-text">℃</span>
                         </div>
@@ -99,7 +99,7 @@
                     <label>終了圧</label>
                     <div class="input-group">
                         <input tabindex="8" type="number" class="form-control" id="pressureExit" name="pressureExit"
-                            value="{{ $oldInput->pressureExit }}" min="0" max="300">
+                            value="{{ $oldInput->pressureExit }}" min="0" max="300" step="10">
                         <div class="input-group-append">
                             <span class="input-group-text">atm</span>
                         </div>
