@@ -17,7 +17,7 @@ class Line extends InterventionImage
         $this->canvas = [
             'width' => 390,
             'height' => 250,
-            'color' => $this->getColor()
+            'background' => [0, 0, 0, 0.5]
         ];
         $this->positions = [
             ['posX' => 0, 'posY' => 50],
@@ -34,7 +34,8 @@ class Line extends InterventionImage
     {
         $canvas = Image::canvas(
             $this->canvas['width'],
-            $this->canvas['height']
+            $this->canvas['height'],
+            $this->canvas['background']
         );
         for ($i = 0; $i < count($this->positions) - 1; $i++) {
             $canvas->line(
@@ -43,7 +44,7 @@ class Line extends InterventionImage
                 $this->positions[$i+1]['posX'],
                 $this->positions[$i+1]['posY'],
                 function ($draw) {
-                    $draw->color($this->getColor());
+                    $draw->color($this->color);
                     $draw->width($this->width);
                 }
             );

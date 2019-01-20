@@ -8,6 +8,7 @@ use App\Models\Unit;
 use App\Models\Content;
 use App\Models\Place;
 use App\Models\DivingLog;
+use App\Models\BottomBackground;
 use Intervention\Image\Facades\Image;
 
 class ImageGeneratorService
@@ -16,6 +17,7 @@ class ImageGeneratorService
     private $sizeY;
     private $photoCanvas;
     private $lineCanvas;
+    private $bottomBackgroundCanvas;
 
     public function __construct(
         Line $line,
@@ -23,7 +25,8 @@ class ImageGeneratorService
         Value $value,
         Unit $unit,
         Content $content,
-        Place $place
+        Place $place,
+        BottomBackground $bottomBackground
     )
     {
         $this->sizeX = 1200;
@@ -34,23 +37,16 @@ class ImageGeneratorService
         $this->unit = $unit;
         $this->content = $content;
         $this->place = $place;
+        $this->bottomBackground = $bottomBackground;
     }
 
     public function generate(DivingLog $divingLog): string
     {
-        $this->photoCanvas = \Image::make($divingLog->photo)->heighten($this->sizeX);
+        $this->photoCanvas = \Image::make($divingLog->photo)->heighten($this->sizeX)->encode('png', 80);
         $this->photoCanvas->crop($this->sizeX, $this->sizeY);
 
-        if (isset($divingLog->color)) {
-            $this->line->setColor($divingLog->color);
-            $this->label->setColor($divingLog->color);
-            $this->value->setColor($divingLog->color);
-            $this->unit->setColor($divingLog->color);
-            $this->content->setColor($divingLog->color);
-            $this->place->setColor($divingLog->color);
-        }
-
         $this->lineCanvas = $this->line->generateCanvas();
+        $this->bottomBackgroundCanvas = $this->bottomBackground->generateCanvas();
 
         if (isset($divingLog->timeEntry)) {
             $this->lineCanvas->text($divingLog->timeEntry, 100, 40, $this->value->getFont());
@@ -119,10 +115,13 @@ class ImageGeneratorService
             $text .= ' ';
         }
 
+        if (isset($text) || isset($divingLog->place)) {
+            $this->photoCanvas->insert($this->bottomBackgroundCanvas, 'bottom', 0, 0);
+        }
+
         if (isset($text)) {
             $this->photoCanvas->text($text, 30, 1170, $this->content->getFont());
         }
-
 
         if (isset($divingLog->place)) {
             $this->photoCanvas->text($divingLog->place, 1170, 1170, $this->place->getFont());
@@ -132,7 +131,7 @@ class ImageGeneratorService
         $this->photoCanvas->insert($this->lineCanvas, 'top-left', 30, 30);
 
         $path = 'storage/photos/temp/';
-        $filename = $path . uniqid() . '.jpg';
+        $filename = $path . uniqid() . '.png';
         if (!file_exists($path)) {
             mkdir($path, 755, true);
         }

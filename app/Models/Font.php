@@ -13,6 +13,7 @@ abstract class Font extends InterventionImage
 
     public function __construct()
     {
+        parent::__construct();
         $this->family = 'fonts/Noto_Sans_JP/NotoSansJP-Regular.otf';
     }
 
@@ -20,7 +21,7 @@ abstract class Font extends InterventionImage
     {
         return function($font) {
             $font->file($this->family);
-            $font->color($this->getColor());
+            $font->color($this->color);
             $font->size($this->size);
             $font->align($this->align);
         };

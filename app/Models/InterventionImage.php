@@ -6,20 +6,12 @@ use Intervention\Image\Facades\Image;
 
 abstract class InterventionImage
 {
-    private $color;
+    protected $color;
+    protected $backgroundColor;
 
     public function __construct()
     {
         $this->color = '#fff';
-    }
-
-    public function setColor(string $color)
-    {
-        $this->color = $color;
-    }
-
-    public function getColor()
-    {
-        return $this->color;
+        $this->backgroundColor = [0, 0, 0, 0.5];
     }
 }

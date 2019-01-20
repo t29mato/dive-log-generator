@@ -3,9 +3,10 @@
 @section('content')
 
 @if(isset($imageUrl))
+<p class="text-success">SUCCESS!</p>
 <img src="{{ $imageUrl }}" class="img-fluid mb-3" width="500"><br>
-<a href="{{ $imageUrl }}" download="PhotoDiveLog_{{ $oldInput->dateDiving }}" class="btn btn-primary mb-1">ダウンロード</a>
-<p>※ 再生成は下から</p>
+<a href="{{ $imageUrl }}" download="PhotoDiveLog_{{ $oldInput->dateDiving }}" class="btn btn-secondary mb-1">フォトダイブログをダウンロード</a>
+<p>※ 条件変更は下から</p>
 @endif
 <form action="{{ route('generate') }}" method="post" enctype="multipart/form-data" class="p-2">
     {{ csrf_field() }}
@@ -149,10 +150,6 @@
             </tr>
         </tbody>
     </table>
-    <h2>3. 文字色選択</h2>
-    <div class="input-group">
-        <input tabindex="14" type="color" id="color" name="color" value="{{ $oldInput->color }}" class="mb-2">
-    </div>
     <button type="submit" class="btn btn-primary">フォトダイブログを生成する</button>
 </form>
 @endsection

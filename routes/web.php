@@ -11,7 +11,7 @@
 |
 */
 
-Route::get('/', 'HomeController@index')->name('home');
+Route::get('/', 'HomeController@home')->name('home');
 Route::get('/generate', 'GeneratorController@index')->name('generate');
 Route::post('/generate', 'GeneratorController@generate');
 

@@ -49,9 +49,17 @@
 
     <main class="py-4">
         <div class="container">
-        @yield('content')
+            @yield('content')
         </div>
     </main>
+
+    <footer class="bd-footer text-muted">
+        <div class="container p-3 p-md-5">
+            <p>Designed and built with all the love in the world by
+                <a href="https://twitter.com/t2kmato" target="_blank" rel="noopener">@mato</a>
+            </p>
+        </div>
+    </footer>
 </body>
 
 </html>
