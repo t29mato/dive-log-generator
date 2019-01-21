@@ -2,8 +2,6 @@
 
 namespace App\Services;
 
-use App\Models\Content;
-use App\Models\Place;
 use App\Models\DivingLog;
 use Intervention\Image\Facades\Image;
 
@@ -11,59 +9,20 @@ class GeneratorService
 {
     private $photoCanvas;
     private $logCanvas;
-    private $descriptionCanvas;
+    private $memoCanvas;
     private $color = '#fff';
-    private $backgroundColor = [0, 0, 0, 0.5];
+    private $backgroundColor = [0, 0, 0, 0.3];
     private $borderWidth = 3;
     private $family = 'fonts/Noto_Sans_JP/NotoSansJP-Regular.otf';
-
-    public function __construct(
-        Content $content,
-        Place $place
-    )
-    {
-        $this->content = $content;
-        $this->place = $place;
-    }
 
     public function generate(DivingLog $divingLog): string
     {
         $this->photoCanvas = $this->generatePhotoCanvas($divingLog->photo);
         $this->logCanvas = $this->generateLogCanvas($divingLog);
-        $this->descriptionCanvas = $this->generateDescriptionCanvas();
+        $this->memoCanvas = $this->generateMemoCanvas($divingLog);
 
-
-        // TODO: refacotring
-        $text = '';
-        if (isset($divingLog->dateDiving)) {
-            $text .= $divingLog->dateDiving;
-            $text .= ' ';
-        }
-
-        if (isset($divingLog->weather)) {
-            $text .= $divingLog->weather;
-            $text .= ' ';
-        }
-
-        if (isset($divingLog->temperature)) {
-            $text .= $divingLog->temperature;
-            $text .= ' ';
-        }
-
-        if (isset($text) || isset($divingLog->place)) {
-            $this->photoCanvas->insert($this->descriptionCanvas, 'bottom', 0, 0);
-        }
-
-        if (isset($text)) {
-            $this->photoCanvas->text($text, 30, 1170, $this->content->getFont());
-        }
-
-        if (isset($divingLog->place)) {
-            $this->photoCanvas->text($divingLog->place, 1170, 1170, $this->place->getFont());
-        }
-
-        // Attach Line to the Photo.
         $this->photoCanvas->insert($this->logCanvas, 'top-left', 30, 30);
+        $this->photoCanvas->insert($this->memoCanvas, 'bottom', 0, 0);
 
         $path = 'storage/photos/temp/';
         $filename = $path . uniqid() . '.png';
@@ -112,8 +71,7 @@ class GeneratorService
             );
         }
 
-        // 入力値のFontの設定
-
+        // ログのテキストの生成とCanvasへの挿入
         if (isset($log->timeEntry)) {
             $logCanvas->text($log->timeEntry, 100, 40, $this->getInputFont());
         }
@@ -176,22 +134,58 @@ class GeneratorService
             ->crop($sizeX, $sizeY);
     }
 
-    private function generateDescriptionCanvas(): \Intervention\Image\Image
+    private function generateMemoCanvas(DivingLog $log): \Intervention\Image\Image
     {
+        // Canvasの設定
         $canvas = [
             'width' => 1200,
             'height' => 90,
             'background' => $this->backgroundColor
         ];
-        $position = [
-            'posX' => 0,
-            'posY' => 50
-        ];
-        return Image::canvas(
+
+        // Canvasの生成
+        $memoCanvas = Image::canvas(
             $canvas['width'],
             $canvas['height'],
             $canvas['background']
         );
+
+        // ログのテキストの生成とCanvasへの挿入
+        $text = '';
+        if (isset($log->dateDiving)) {
+            $text .= $log->dateDiving;
+            $text .= ' ';
+        }
+
+        if (isset($log->weather)) {
+            $text .= $log->weather;
+            $text .= ' ';
+        }
+
+        if (isset($log->temperature)) {
+            $text .= $log->temperature;
+            $text .= ' ';
+        }
+
+        if (isset($text)) {
+            $memoCanvas->text($text, 30, 56, function($font) {
+                $font->file($this->family);
+                $font->color($this->color);
+                $font->size(36);
+                $font->align('left');
+            });
+        }
+
+        if (isset($log->place)) {
+            $memoCanvas->text($log->place, 1170, 56, function($font) {
+                $font->file($this->family);
+                $font->color($this->color);
+                $font->size(36);
+                $font->align('right');
+            });
+        }
+
+        return $memoCanvas;
     }
 
     private function getInputFont()
