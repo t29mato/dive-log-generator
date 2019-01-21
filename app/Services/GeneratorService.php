@@ -8,14 +8,13 @@ use App\Models\Unit;
 use App\Models\Content;
 use App\Models\Place;
 use App\Models\DivingLog;
-use App\Models\BottomBackground;
 use Intervention\Image\Facades\Image;
 
 class GeneratorService
 {
     private $photoCanvas;
     private $lineCanvas;
-    private $bottomBackgroundCanvas;
+    private $descriptionCanvas;
     private $color = '#fff';
     private $backgroundColor = [0, 0, 0, 0.5];
     private $borderWidth = 3;
@@ -25,8 +24,7 @@ class GeneratorService
         Value $value,
         Unit $unit,
         Content $content,
-        Place $place,
-        BottomBackground $bottomBackground
+        Place $place
     )
     {
         $this->sizeX = 1200;
@@ -36,15 +34,13 @@ class GeneratorService
         $this->unit = $unit;
         $this->content = $content;
         $this->place = $place;
-        $this->bottomBackground = $bottomBackground;
     }
 
     public function generate(DivingLog $divingLog): string
     {
         $this->photoCanvas = $this->generatePhotoCanvas($divingLog->photo);
         $this->lineCanvas = $this->generateLineCanvas();
-
-        $this->bottomBackgroundCanvas = $this->bottomBackground->generateCanvas();
+        $this->descriptionCanvas = $this->generateDescriptionCanvas();
 
         if (isset($divingLog->timeEntry)) {
             $this->lineCanvas->text($divingLog->timeEntry, 100, 40, $this->value->getFont());
@@ -114,7 +110,7 @@ class GeneratorService
         }
 
         if (isset($text) || isset($divingLog->place)) {
-            $this->photoCanvas->insert($this->bottomBackgroundCanvas, 'bottom', 0, 0);
+            $this->photoCanvas->insert($this->descriptionCanvas, 'bottom', 0, 0);
         }
 
         if (isset($text)) {
@@ -177,11 +173,29 @@ class GeneratorService
         return $canvas;
     }
 
-    private function generatePhotoCanvas($photo)
+    private function generatePhotoCanvas(string $photo): \Intervention\Image\Image
     {
         return \Image::make($photo)
             ->heighten($this->sizeX)
             ->encode('png', 80)
             ->crop($this->sizeX, $this->sizeY);
+    }
+
+    private function generateDescriptionCanvas(): \Intervention\Image\Image
+    {
+        $canvas = [
+            'width' => 1200,
+            'height' => 90,
+            'background' => $this->backgroundColor
+        ];
+        $position = [
+            'posX' => 0,
+            'posY' => 50
+        ];
+        return Image::canvas(
+            $canvas['width'],
+            $canvas['height'],
+            $canvas['background']
+        );
     }
 }
