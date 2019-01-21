@@ -2,7 +2,6 @@
 
 namespace App\Services;
 
-use App\Models\Line;
 use App\Models\Label;
 use App\Models\Value;
 use App\Models\Unit;
@@ -14,14 +13,14 @@ use Intervention\Image\Facades\Image;
 
 class GeneratorService
 {
-    private $sizeX;
-    private $sizeY;
     private $photoCanvas;
     private $lineCanvas;
     private $bottomBackgroundCanvas;
+    private $color = '#fff';
+    private $backgroundColor = [0, 0, 0, 0.5];
+    private $borderWidth = 3;
 
     public function __construct(
-        Line $line,
         Label $label,
         Value $value,
         Unit $unit,
@@ -32,7 +31,6 @@ class GeneratorService
     {
         $this->sizeX = 1200;
         $this->sizeY = 1200;
-        $this->line = $line;
         $this->label = $label;
         $this->value = $value;
         $this->unit = $unit;
@@ -46,7 +44,7 @@ class GeneratorService
         $this->photoCanvas = \Image::make($divingLog->photo)->heighten($this->sizeX)->encode('png', 80);
         $this->photoCanvas->crop($this->sizeX, $this->sizeY);
 
-        $this->lineCanvas = $this->line->generateCanvas();
+        $this->lineCanvas = $this->generateLine();
         $this->bottomBackgroundCanvas = $this->bottomBackground->generateCanvas();
 
         if (isset($divingLog->timeEntry)) {
@@ -140,5 +138,43 @@ class GeneratorService
         $imageUrl = url($filename);
 
         return $imageUrl;
+    }
+
+    private function generateLine(): \Intervention\Image\Image
+    {
+        // Canvasの設定
+        $canvas = [
+            'width' => 390,
+            'height' => 250,
+            'background' => $this->backgroundColor
+        ];
+        $positions = [
+            ['posX' => 0, 'posY' => 50],
+            ['posX' => 130, 'posY' => 50],
+            ['posX' => 130, 'posY' => 240],
+            ['posX' => 260, 'posY' => 240],
+            ['posX' => 260, 'posY' => 50],
+            ['posX' => 390, 'posY' => 50],
+        ];
+        $canvas = Image::canvas(
+            $canvas['width'],
+            $canvas['height'],
+            $canvas['background']
+        );
+
+        // Canvasの生成
+        for ($i = 0; $i < count($positions) - 1; $i++) {
+            $canvas->line(
+                $positions[$i]['posX'],
+                $positions[$i]['posY'],
+                $positions[$i+1]['posX'],
+                $positions[$i+1]['posY'],
+                function ($draw) {
+                    $draw->color($this->color);
+                    $draw->width($this->borderWidth);
+                }
+            );
+        }
+        return $canvas;
     }
 }
