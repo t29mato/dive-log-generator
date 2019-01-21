@@ -41,10 +41,9 @@ class GeneratorService
 
     public function generate(DivingLog $divingLog): string
     {
-        $this->photoCanvas = \Image::make($divingLog->photo)->heighten($this->sizeX)->encode('png', 80);
-        $this->photoCanvas->crop($this->sizeX, $this->sizeY);
+        $this->photoCanvas = $this->generatePhotoCanvas($divingLog->photo);
+        $this->lineCanvas = $this->generateLineCanvas();
 
-        $this->lineCanvas = $this->generateLine();
         $this->bottomBackgroundCanvas = $this->bottomBackground->generateCanvas();
 
         if (isset($divingLog->timeEntry)) {
@@ -140,7 +139,7 @@ class GeneratorService
         return $imageUrl;
     }
 
-    private function generateLine(): \Intervention\Image\Image
+    private function generateLineCanvas(): \Intervention\Image\Image
     {
         // Canvasの設定
         $canvas = [
@@ -176,5 +175,13 @@ class GeneratorService
             );
         }
         return $canvas;
+    }
+
+    private function generatePhotoCanvas($photo)
+    {
+        return \Image::make($photo)
+            ->heighten($this->sizeX)
+            ->encode('png', 80)
+            ->crop($this->sizeX, $this->sizeY);
     }
 }
