@@ -26,6 +26,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->bind('App\Services\ImageGeneratorService');
+        $this->app->bind('App\Services\GeneratorService');
     }
 }

@@ -3,7 +3,6 @@
 @section('content')
 
 @if(isset($imageUrl))
-<p class="text-success">SUCCESS!</p>
 <img src="{{ $imageUrl }}" class="img-fluid mb-3" width="500"><br>
 <a href="{{ $imageUrl }}" download="PhotoDiveLog_{{ $oldInput->dateDiving }}" class="btn btn-secondary mb-1">フォトログをダウンロード</a>
 <p>※ 条件変更は下から</p>
@@ -13,7 +12,7 @@
     <h2>1. 写真選択</h2>
     <table class="mb-4">
         <div class="input-group">
-            <input tabindex="13" type="file" id="photo" name="photo" required>
+            <input tabindex="13" type="file" id="photo" name="photo" required>※ 縦横1,200ピクセル以上の画像推奨
         </div>
     </table>
     <h2>2. ダイビングログ入力</h2>

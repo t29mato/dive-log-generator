@@ -3,17 +3,17 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Service\ImageGeneratorService;
+use App\Services\GeneratorService;
 use App\Models\DivingLog;
 use Illuminate\Support\Facades\Storage;
 
 class GeneratorController extends Controller
 {
-    protected $imageGeneratorService;
+    protected $generatorService;
     protected $divingLog;
-    public function __construct(ImageGeneratorService $imageGeneratorService, DivingLog $divingLog)
+    public function __construct(GeneratorService $generatorService, DivingLog $divingLog)
     {
-        $this->imageGeneratorService = $imageGeneratorService;
+        $this->generatorService = $generatorService;
         $this->divingLog = $divingLog;
     }
 
@@ -26,17 +26,12 @@ class GeneratorController extends Controller
     {
         $this->validate($request, DivingLog::$rules);
         $this->divingLog->setDivingLog($request);
-        $imageUrl = $this->imageGeneratorService->generate($this->divingLog);
+        $imageUrl = $this->generatorService->generate($this->divingLog);
         $oldInput = $request;
 
         return view('generate',[
             'imageUrl' => $imageUrl,
             'oldInput' => $oldInput,
         ]);
-    }
-
-    public function upload(Request $request)
-    {
-
     }
 }

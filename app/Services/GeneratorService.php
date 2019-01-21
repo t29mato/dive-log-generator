@@ -1,5 +1,6 @@
 <?php
-namespace App\Service;
+
+namespace App\Services;
 
 use App\Models\Line;
 use App\Models\Label;
@@ -11,7 +12,7 @@ use App\Models\DivingLog;
 use App\Models\BottomBackground;
 use Intervention\Image\Facades\Image;
 
-class ImageGeneratorService
+class GeneratorService
 {
     private $sizeX;
     private $sizeY;
