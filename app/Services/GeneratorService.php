@@ -2,7 +2,6 @@
 
 namespace App\Services;
 
-use App\Models\Label;
 use App\Models\Content;
 use App\Models\Place;
 use App\Models\DivingLog;
@@ -19,12 +18,10 @@ class GeneratorService
     private $family = 'fonts/Noto_Sans_JP/NotoSansJP-Regular.otf';
 
     public function __construct(
-        Label $label,
         Content $content,
         Place $place
     )
     {
-        $this->label = $label;
         $this->content = $content;
         $this->place = $place;
     }
@@ -131,37 +128,37 @@ class GeneratorService
         }
 
         if (is_numeric($log->tempTop)) {
-            $logCanvas->text('top', 10, 90, $this->label->getFont());
+            $logCanvas->text('top', 10, 90, $this->getLabelFont());
             $logCanvas->text($log->tempTop, 70, 130, $this->getInputFont());
             $logCanvas->text('℃', 100, 130, $this->getUnitFont());
         }
 
         if (is_numeric($log->tempBottom)) {
-            $logCanvas->text('bottom', 10, 170, $this->label->getFont());
+            $logCanvas->text('bottom', 10, 170, $this->getLabelFont());
             $logCanvas->text($log->tempBottom, 70, 210, $this->getInputFont());
             $logCanvas->text('℃', 100, 210, $this->getUnitFont());
         }
 
         if (is_numeric($log->depthAvg)) {
-            $logCanvas->text('avg.', 140, 90, $this->label->getFont());
+            $logCanvas->text('avg.', 140, 90, $this->getLabelFont());
             $logCanvas->text($log->depthAvg, 220, 130, $this->getInputFont());
             $logCanvas->text('m', 250, 130, $this->getUnitFont());
         }
 
         if (is_numeric($log->depthMax)) {
-            $logCanvas->text('max', 140, 170, $this->label->getFont());
+            $logCanvas->text('max', 140, 170, $this->getLabelFont());
             $logCanvas->text($log->depthMax, 220, 210, $this->getInputFont());
             $logCanvas->text('m', 250, 210, $this->getUnitFont());
         }
 
         if (is_numeric($log->pressureEntry)) {
-            $logCanvas->text('entry', 270, 90, $this->label->getFont());
+            $logCanvas->text('entry', 270, 90, $this->getLabelFont());
             $logCanvas->text($log->pressureEntry, 340, 130, $this->getInputFont());
             $logCanvas->text('bar', 380, 130, $this->getUnitFont());
         }
 
         if (is_numeric($log->pressureExit)) {
-            $logCanvas->text('exit', 270, 170, $this->label->getFont());
+            $logCanvas->text('exit', 270, 170, $this->getLabelFont());
             $logCanvas->text($log->pressureExit, 340, 210, $this->getInputFont());
             $logCanvas->text('bar', 380, 210, $this->getUnitFont());
         }
@@ -219,4 +216,14 @@ class GeneratorService
         return $return;
     }
 
+    private function getLabelFont()
+    {
+        $return = function($font) {
+            $font->file($this->family);
+            $font->color($this->color);
+            $font->size(24);
+            $font->align('left');
+        };
+        return $return;
+    }
 }
