@@ -3,7 +3,6 @@
 namespace App\Services;
 
 use App\Models\Label;
-use App\Models\Value;
 use App\Models\Unit;
 use App\Models\Content;
 use App\Models\Place;
@@ -18,19 +17,16 @@ class GeneratorService
     private $color = '#fff';
     private $backgroundColor = [0, 0, 0, 0.5];
     private $borderWidth = 3;
+    private $family = 'fonts/Noto_Sans_JP/NotoSansJP-Regular.otf';
 
     public function __construct(
         Label $label,
-        Value $value,
         Unit $unit,
         Content $content,
         Place $place
     )
     {
-        $this->sizeX = 1200;
-        $this->sizeY = 1200;
         $this->label = $label;
-        $this->value = $value;
         $this->unit = $unit;
         $this->content = $content;
         $this->place = $place;
@@ -86,7 +82,7 @@ class GeneratorService
         return $imageUrl;
     }
 
-    private function generateLogCanvas(DivingLog $divingLog): \Intervention\Image\Image
+    private function generateLogCanvas(DivingLog $log): \Intervention\Image\Image
     {
         // Canvasの設定
         $canvas = [
@@ -122,52 +118,54 @@ class GeneratorService
             );
         }
 
-        if (isset($divingLog->timeEntry)) {
-            $logCanvas->text($divingLog->timeEntry, 100, 40, $this->value->getFont());
+        // 入力値のFontの設定
+
+        if (isset($log->timeEntry)) {
+            $logCanvas->text($log->timeEntry, 100, 40, $this->getInputFont());
         }
 
-        if (isset($divingLog->timeExit)) {
-            $logCanvas->text($divingLog->timeExit, 360, 40, $this->value->getFont());
+        if (isset($log->timeExit)) {
+            $logCanvas->text($log->timeExit, 360, 40, $this->getInputFont());
         }
 
-        if (is_numeric($divingLog->timeDive)) {
-            $logCanvas->text($divingLog->timeDive, 190, 40, $this->value->getFont());
+        if (is_numeric($log->timeDive)) {
+            $logCanvas->text($log->timeDive, 190, 40, $this->getInputFont());
             $logCanvas->text('min', 240, 40, $this->unit->getFont());
         }
 
-        if (is_numeric($divingLog->tempTop)) {
+        if (is_numeric($log->tempTop)) {
             $logCanvas->text('top', 10, 90, $this->label->getFont());
-            $logCanvas->text($divingLog->tempTop, 70, 130, $this->value->getFont());
+            $logCanvas->text($log->tempTop, 70, 130, $this->getInputFont());
             $logCanvas->text('℃', 100, 130, $this->unit->getFont());
         }
 
-        if (is_numeric($divingLog->tempBottom)) {
+        if (is_numeric($log->tempBottom)) {
             $logCanvas->text('bottom', 10, 170, $this->label->getFont());
-            $logCanvas->text($divingLog->tempBottom, 70, 210, $this->value->getFont());
+            $logCanvas->text($log->tempBottom, 70, 210, $this->getInputFont());
             $logCanvas->text('℃', 100, 210, $this->unit->getFont());
         }
 
-        if (is_numeric($divingLog->depthAvg)) {
+        if (is_numeric($log->depthAvg)) {
             $logCanvas->text('avg.', 140, 90, $this->label->getFont());
-            $logCanvas->text($divingLog->depthAvg, 220, 130, $this->value->getFont());
+            $logCanvas->text($log->depthAvg, 220, 130, $this->getInputFont());
             $logCanvas->text('m', 250, 130, $this->unit->getFont());
         }
 
-        if (is_numeric($divingLog->depthMax)) {
+        if (is_numeric($log->depthMax)) {
             $logCanvas->text('max', 140, 170, $this->label->getFont());
-            $logCanvas->text($divingLog->depthMax, 220, 210, $this->value->getFont());
+            $logCanvas->text($log->depthMax, 220, 210, $this->getInputFont());
             $logCanvas->text('m', 250, 210, $this->unit->getFont());
         }
 
-        if (is_numeric($divingLog->pressureEntry)) {
+        if (is_numeric($log->pressureEntry)) {
             $logCanvas->text('entry', 270, 90, $this->label->getFont());
-            $logCanvas->text($divingLog->pressureEntry, 340, 130, $this->value->getFont());
+            $logCanvas->text($log->pressureEntry, 340, 130, $this->getInputFont());
             $logCanvas->text('bar', 380, 130, $this->unit->getFont());
         }
 
-        if (is_numeric($divingLog->pressureExit)) {
+        if (is_numeric($log->pressureExit)) {
             $logCanvas->text('exit', 270, 170, $this->label->getFont());
-            $logCanvas->text($divingLog->pressureExit, 340, 210, $this->value->getFont());
+            $logCanvas->text($log->pressureExit, 340, 210, $this->getInputFont());
             $logCanvas->text('bar', 380, 210, $this->unit->getFont());
         }
 
@@ -176,10 +174,12 @@ class GeneratorService
 
     private function generatePhotoCanvas(string $photo): \Intervention\Image\Image
     {
+        $sizeX = 1200;
+        $sizeY = 1200;
         return \Image::make($photo)
-            ->heighten($this->sizeX)
+            ->heighten($sizeX)
             ->encode('png', 80)
-            ->crop($this->sizeX, $this->sizeY);
+            ->crop($sizeX, $sizeY);
     }
 
     private function generateDescriptionCanvas(): \Intervention\Image\Image
@@ -200,5 +200,15 @@ class GeneratorService
         );
     }
 
+    private function getInputFont()
+    {
+        $return = function($font) {
+            $font->file($this->family);
+            $font->color($this->color);
+            $font->size(36);
+            $font->align('right');
+        };
+        return $return;
+    }
 
 }
