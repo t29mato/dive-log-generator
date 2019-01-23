@@ -10524,3 +10524,7 @@ main {
   border-left: solid 3px;
 }
 
+.table-dive-diagram .form-control {
+  padding: 0.375rem 0 0.375rem 0.75rem;
+}
+

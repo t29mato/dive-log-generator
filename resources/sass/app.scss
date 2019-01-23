@@ -37,4 +37,7 @@ main {
   .b-left {
     border-left: $border-style $border-width;
   }
+  .form-control {
+    padding: 0.375rem 0 0.375rem 0.75rem;
+  }
 }
