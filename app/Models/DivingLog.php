@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Input;
 
 class DivingLog
 {
+    public $numberDiving;
     public $timeEntry;
     public $timeExit;
     public $timeDive;
@@ -27,6 +28,7 @@ class DivingLog
 
     public function setDivingLog($request)
     {
+        $this->numberDiving = $this->issetRequest($request->numberDiving);
         $this->timeEntry = $this->issetRequest($request->timeEntry);
         $this->timeExit = $this->issetRequest($request->timeExit);
         $this->timeDive = $this->issetRequest($request->timeDive);

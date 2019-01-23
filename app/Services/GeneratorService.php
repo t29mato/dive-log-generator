@@ -152,6 +152,11 @@ class GeneratorService
 
         // ログのテキストの生成とCanvasへの挿入
         $text = '';
+        if (isset($log->numberDiving)) {
+            $text .= '#' . $log->numberDiving;
+            $text .= ' ';
+        }
+
         if (isset($log->dateDiving)) {
             $text .= $log->dateDiving;
             $text .= ' ';
