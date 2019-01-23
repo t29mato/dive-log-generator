@@ -4,8 +4,7 @@
 
 @if(isset($imageUrl))
 <img src="{{ $imageUrl }}" class="img-fluid mb-3" width="500"><br>
-<a href="{{ $imageUrl }}" download="PhotoDiveLog_{{ $oldInput->dateDiving }}" class="btn btn-secondary mb-1">フォトログをダウンロード</a>
-<p>※ 条件変更は下から</p>
+<a href="{{ $imageUrl }}" download="PhotoDiveLog_{{ $oldInput->dateDiving }}" class="btn btn-secondary mb-2">ダウンロード</a>
 @endif
 <form action="{{ route('generate') }}" method="post" enctype="multipart/form-data" class="p-2">
     {{ csrf_field() }}
@@ -13,7 +12,10 @@
     <div class="row mb-2">
         <div class="col-12">
             <div class="input-group">
-                <input tabindex="13" type="file" id="photo" name="photo" required>※ 縦横1,200ピクセル以上の画像推奨
+                <input tabindex="13" type="file" id="photo" name="photo" required>※ 推奨画像：縦横1,200ピクセル以上
+                @if(isset($oldInput))
+                <button type="submit" class="btn btn-primary mb-2">フォトログ再生成</button>
+                @endif
             </div>
         </div>
     </div>
@@ -156,6 +158,12 @@
             </tr>
         </tbody>
     </table>
-    <button type="submit" class="btn btn-primary">フォトログを生成する</button>
+    <button type="submit" class="btn btn-primary">
+        @if(isset($oldInput))
+        フォトログ再生成
+        @else
+        フォトログ生成
+        @endif
+    </button>
 </form>
 @endsection
