@@ -151,29 +151,33 @@ class GeneratorService
         );
 
         // ログのテキストの生成とCanvasへの挿入
-        $text = '';
+        $leftMemo = '';
         if (isset($log->numberDiving)) {
-            $text .= '#' . $log->numberDiving;
-            $text .= ' ';
+            $leftMemo .= '#' . $log->numberDiving;
+            $leftMemo .= ' ';
+        }
+        if (isset($log->place)) {
+            $leftMemo .= $log->place;
         }
 
+        $rightMemo = '';
         if (isset($log->dateDiving)) {
-            $text .= $log->dateDiving;
-            $text .= ' ';
+            $rightMemo .= $log->dateDiving;
+            $rightMemo .= ' ';
         }
 
         if (isset($log->weather)) {
-            $text .= $log->weather;
-            $text .= ' ';
+            $rightMemo .= $log->weather;
+            $rightMemo .= ' ';
         }
 
         if (isset($log->temperature)) {
-            $text .= $log->temperature;
-            $text .= ' ';
+            $rightMemo .= $log->temperature;
+            $rightMemo .= ' ';
         }
 
-        if (isset($text)) {
-            $memoCanvas->text($text, 30, 56, function($font) {
+        if (isset($leftMemo)) {
+            $memoCanvas->text($leftMemo, 30, 56, function($font) {
                 $font->file($this->family);
                 $font->color($this->color);
                 $font->size(36);
@@ -181,8 +185,8 @@ class GeneratorService
             });
         }
 
-        if (isset($log->place)) {
-            $memoCanvas->text($log->place, 1170, 56, function($font) {
+        if (isset($rightMemo)) {
+            $memoCanvas->text($rightMemo, 1170, 56, function($font) {
                 $font->file($this->family);
                 $font->color($this->color);
                 $font->size(36);
