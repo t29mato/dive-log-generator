@@ -74,7 +74,7 @@
     <div class="row mb-2">
         <div class="col-12">
             <span>場所</span>
-            <div class="input-group mb-2">
+            <div class="input-group">
                 <input tabindex="6" type="text" class="form-control" id="place" name="place" value="{{ $oldInput->place }}"
                     maxlength="40" placeholder="例：慶良間諸島 渡嘉敷島">
             </div>

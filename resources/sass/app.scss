@@ -25,17 +25,18 @@ main {
   }
   $border-width: 3px;
   $border-style: solid;
+  $border-color: royalblue;
   .b-top {
-    border-top: $border-style $border-width;
+    border-top: $border-style $border-width $border-color;
   }
   .b-right {
-    border-right: $border-style $border-width;
+    border-right: $border-style $border-width $border-color;
   }
   .b-bottom {
-    border-bottom: $border-style $border-width;
+    border-bottom: $border-style $border-width $border-color;
   }
   .b-left {
-    border-left: $border-style $border-width;
+    border-left: $border-style $border-width $border-color;
   }
   .form-control {
     padding: 0.375rem 0 0.375rem 0.75rem;

@@ -10509,19 +10509,19 @@ main {
 }
 
 .table-dive-diagram .b-top {
-  border-top: solid 3px;
+  border-top: solid 3px royalblue;
 }
 
 .table-dive-diagram .b-right {
-  border-right: solid 3px;
+  border-right: solid 3px royalblue;
 }
 
 .table-dive-diagram .b-bottom {
-  border-bottom: solid 3px;
+  border-bottom: solid 3px royalblue;
 }
 
 .table-dive-diagram .b-left {
-  border-left: solid 3px;
+  border-left: solid 3px royalblue;
 }
 
 .table-dive-diagram .form-control {
