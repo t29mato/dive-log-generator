@@ -12,7 +12,7 @@
     <div class="row mb-2">
         <div class="col-12">
             <div class="input-group">
-                <input tabindex="13" type="file" id="photo" name="photo" required>※ 推奨画像：縦横1,200ピクセル以上
+                <input tabindex="1" type="file" id="photo" name="photo" required>※ 推奨画像：縦横1,200ピクセル以上
                 @if(isset($oldInput))
                 <button type="submit" class="btn btn-primary mb-2">フォトログ再生成</button>
                 @endif
@@ -22,16 +22,23 @@
     <h2>2. ダイビングログ入力</h2>
     <div class="row mb-2">
         <div class="col-6">
-            <span>何本目</span>
+            <span>本数</span>
             <div class="input-group">
-                <input tabindex="9" type="number" class="form-control" id="numberDiving" name="numberDiving" value="{{ $oldInput->numberDiving }}"
-                    min="1" max="99999" placeholder="例: 100">
+                <input tabindex="2" type="number" class="form-control" id="numberDiving" name="numberDiving" value=@if(isset($oldInput->numberDiving))
+                {{ $oldInput->numberDiving }}
+                @else
+                100
+                @endif
+                min="1" max="99999">
+                <div class="input-group-append">
+                    <span class="input-group-text">本目</span>
+                </div>
             </div>
         </div>
         <div class="col-6">
             <span>日付</span>
             <div class="input-group">
-                <input tabindex="9" type="date" class="form-control" id="dateDiving" name="dateDiving" value="{{ $oldInput->dateDiving }}">
+                <input tabindex="3" type="date" class="form-control" id="dateDiving" name="dateDiving" value="{{ $oldInput->dateDiving }}">
             </div>
         </div>
     </div>
@@ -39,7 +46,7 @@
         <div class="col-6">
             <span>天気</span>
             <div class="input-group">
-                <select tabindex="10" class="form-control" id="weather" name="weather" value="{{ $oldInput->weather }}">
+                <select tabindex="4" class="form-control" id="weather" name="weather" value="{{ $oldInput->weather }}">
                     <option value="">選択する</option>
                     <option value="晴れ" @if($oldInput->weather === '晴れ') selected @endif>晴れ</option>
                     <option value="曇り" @if($oldInput->weather === '曇り') selected @endif>曇り</option>
@@ -52,8 +59,15 @@
         <div class="col-6">
             <span>気温</span>
             <div class="input-group">
-                <input tabindex="11" type="number" class="form-control" id="temperature" name="temperature" value="{{ $oldInput->temperature }}"
-                    min="0" max="40" step="0.1">
+                <input tabindex="5" type="number" class="form-control" id="temperature" name="temperature" value=@if(isset($oldInput->temperature))
+                {{ $oldInput->temperature }}
+                @else
+                25
+                @endif
+                min="0" max="40" step="0.1">
+                <div class="input-group-append">
+                    <span class="input-group-text">℃</span>
+                </div>
             </div>
         </div>
     </div>
@@ -61,8 +75,8 @@
         <div class="col-12">
             <span>場所</span>
             <div class="input-group mb-2">
-                <input tabindex="12" type="text" class="form-control" id="place" name="place" value="{{ $oldInput->place }}"
-                    maxlength="40">
+                <input tabindex="6" type="text" class="form-control" id="place" name="place" value="{{ $oldInput->place }}"
+                    maxlength="40" placeholder="例：慶良間諸島 渡嘉敷島">
             </div>
         </div>
     </div>
@@ -72,7 +86,11 @@
                 <td>
                     <span>開始時刻</span>
                     <div class="input-group">
-                        <input tabindex="1" type="time" class="form-control" id="timeEntry" name="timeEntry" value="{{ $oldInput->timeEntry }}">
+                        <input tabindex="7" type="time" class="form-control" id="timeEntry" name="timeEntry" value=@if(isset($oldInput->timeEntry))
+                        {{ $oldInput->timeEntry }}
+                        @else
+                        10:00
+                        @endif
                     </div>
                 </td>
                 <td>
@@ -80,15 +98,18 @@
                     <div class="input-group">
                         <input type="number" class="form-control" id="timeDive" name="timeDive" value="{{ $oldInput->timeDive }}"
                             readonly="readonly">
-                        <div class="input-group-append">
-                            <span class="input-group-text">min</span>
+                        <div class="input-group-append"> <span class="input-group-text">min</span>
                         </div>
                     </div>
                 </td>
                 <td>
                     <span>終了時刻</span>
                     <div class="input-group">
-                        <input tabindex="2" type="time" class="form-control" id="timeExit" name="timeExit" value="{{ $oldInput->timeExit }}">
+                        <input tabindex="8" type="time" class="form-control" id="timeExit" name="timeExit" value=@if(isset($oldInput->timeExit))
+                        {{ $oldInput->timeExit }}
+                        @else
+                        10:00
+                        @endif
                     </div>
                 </td>
             </tr>
@@ -96,8 +117,12 @@
                 <td class="b-top b-right">
                     <span>水温 (水面)</span>
                     <div class="input-group">
-                        <input tabindex="3" type="number" class="form-control" id="tempTop" name="tempTop" value="{{ $oldInput->tempTop }}"
-                            min="0" max="40" step="0.1">
+                        <input tabindex="9" type="number" class="form-control" id="tempTop" name="tempTop" value=@if(isset($oldInput->tempTop))
+                        {{ $oldInput->tempTop }}
+                        @else
+                        25
+                        @endif
+                        min="0" max="40" step="0.1">
                         <div class="input-group-append">
                             <span class="input-group-text">℃</span>
                         </div>
@@ -106,8 +131,12 @@
                 <td>
                     <span>平均水深</span>
                     <div class="input-group">
-                        <input tabindex="5" type="number" class="form-control" id="depthAvg" name="depthAvg" value="{{ $oldInput->depthAvg }}"
-                            min="1" max="40" step="0.1">
+                        <input tabindex="11" type="number" class="form-control" id="depthAvg" name="depthAvg" value=@if(isset($oldInput->depthAvg))
+                        {{ $oldInput->depthAvg }}
+                        @else
+                        10.0
+                        @endif
+                        min="1" max="40" step="0.1">
                         <div class="input-group-append">
                             <span class="input-group-text">m</span>
                         </div>
@@ -116,8 +145,12 @@
                 <td class="b-left b-top">
                     <span>開始圧</span>
                     <div class="input-group">
-                        <input tabindex="7" type="number" class="form-control" id="pressureEntry" name="pressureEntry"
-                            value="{{ $oldInput->pressureEntry }}" min="0" max="300" step="10">
+                        <input tabindex="13" type="number" class="form-control" id="pressureEntry" name="pressureEntry"
+                            value=@if(isset($oldInput->pressureEntry))
+                        {{ $oldInput->pressureEntry }}
+                        @else
+                        200
+                        @endif
                         <div class="input-group-append">
                             <span class="input-group-text">atm</span>
                         </div>
@@ -128,8 +161,12 @@
                 <td>
                     <span>水温 (水底)</span>
                     <div class="input-group">
-                        <input tabindex="4" type="number" class="form-control" id="tempBottom" name="tempBottom" value="{{ $oldInput->tempBottom }}"
-                            min="0" max="40" step="0.1">
+                        <input tabindex="10" type="number" class="form-control" id="tempBottom" name="tempBottom" value=@if(isset($oldInput->tempBottom))
+                        {{ $oldInput->tempBottom }}
+                        @else
+                        22
+                        @endif
+                        min="0" max="40" step="0.1">
                         <div class="input-group-append">
                             <span class="input-group-text">℃</span>
                         </div>
@@ -138,8 +175,12 @@
                 <td class="b-left b-right b-bottom">
                     <span>最大水深</span>
                     <div class="input-group">
-                        <input tabindex="6" type="number" class="form-control" id="depthMax" name="depthMax" value="{{ $oldInput->depthMax }}"
-                            min="1" max="40" step="0.1">
+                        <input tabindex="12" type="number" class="form-control" id="depthMax" name="depthMax" value=@if(isset($oldInput->depthMax))
+                        {{ $oldInput->depthMax }}
+                        @else
+                        20
+                        @endif
+                        min="1" max="40" step="0.1">
                         <div class="input-group-append">
                             <span class="input-group-text">m</span>
                         </div>
@@ -148,8 +189,12 @@
                 <td>
                     <span>終了圧</span>
                     <div class="input-group">
-                        <input tabindex="8" type="number" class="form-control" id="pressureExit" name="pressureExit"
-                            value="{{ $oldInput->pressureExit }}" min="0" max="300" step="10">
+                        <input tabindex="14" type="number" class="form-control" id="pressureExit" name="pressureExit"
+                            value=@if(isset($oldInput->pressureExit))
+                        {{ $oldInput->pressureExit }}
+                        @else
+                        100
+                        @endif
                         <div class="input-group-append">
                             <span class="input-group-text">atm</span>
                         </div>
