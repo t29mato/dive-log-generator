@@ -211,7 +211,7 @@
                 <input id="top-left-white" type="radio" name="template" value="top-left-white" @if($oldInput->template === 'top-left-white')
                 checked
                 @endif
-                required>
+                checked>
                 <label for="top-left-white">
                     <img class="img-fluid m-1" src="{{ asset('images/top-left-white.png') }}" width="80">
                 </label>
