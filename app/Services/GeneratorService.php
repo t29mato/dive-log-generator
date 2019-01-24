@@ -19,7 +19,7 @@ class GeneratorService
     {
         if (strpos($template, 'black') !== false) {
             $this->color = '#000';
-            $this->backgroundColor = [255, 255, 255, 0.3];
+            $this->backgroundColor = [255, 255, 255, 0.6];
         }
 
         $this->photoCanvas = $this->generatePhotoCanvas($divingLog->photo);
