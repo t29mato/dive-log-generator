@@ -204,6 +204,38 @@
             </tr>
         </tbody>
     </table>
+    <h2>3. テンプレートを選択</h2>
+    <div class="row">
+        <div class="col-12">
+            <div class="input-group">
+                <input id="top-left-white" type="radio" name="template" value="top-left-white" @if($oldInput->template === 'top-left-white')
+                checked
+                @endif
+                >
+                <label for="top-left-white">
+                    <img class="img-fluid m-1" src="{{ asset('images/top-left-white.png') }}" width="80">
+                </label>
+                <input id="top-right-white" type="radio" name="template" value="top-right-white" @if($oldInput->template === 'top-right-white')
+                checked
+                @endif>
+                <label for="top-right-white">
+                    <img class="img-fluid m-1" src="{{ asset('images/top-right-white.png') }}" width="80">
+                </label>
+                <input id="top-left-black" type="radio" name="template" value="top-left-black" @if($oldInput->template === 'top-left-black')
+                checked
+                @endif>
+                <label for="top-left-black">
+                    <img class="img-fluid m-1" src="{{ asset('images/top-left-black.png') }}" width="80">
+                </label>
+                <input id="top-right-black" type="radio" name="template" value="top-right-black" @if($oldInput->template === 'top-right-black')
+                checked
+                @endif>
+                <label for="top-right-black">
+                    <img class="img-fluid m-1" src="{{ asset('images/top-right-black.png') }}" width="80">
+                </label>
+            </div>
+        </div>
+    </div>
     <button type="submit" class="btn btn-primary">
         @if(isset($oldInput->numberDiving))
         フォトログ再生成

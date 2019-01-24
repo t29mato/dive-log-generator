@@ -15,14 +15,25 @@ class GeneratorService
     private $borderWidth = 3;
     private $family = 'fonts/Noto_Sans_JP/NotoSansJP-Regular.otf';
 
-    public function generate(DivingLog $divingLog): string
+    public function generate(DivingLog $divingLog, string $template): string
     {
+        if (strpos($template, 'black') !== false) {
+            $this->color = '#000';
+            $this->backgroundColor = [255, 255, 255, 0.3];
+        }
+
         $this->photoCanvas = $this->generatePhotoCanvas($divingLog->photo);
         $this->logCanvas = $this->generateLogCanvas($divingLog);
         $this->memoCanvas = $this->generateMemoCanvas($divingLog);
 
-        $this->photoCanvas->insert($this->logCanvas, 'top-left', 30, 30);
+        if (strpos($template, 'left')) {
+            $this->photoCanvas->insert($this->logCanvas, 'top-left', 30, 30);
+        } else {
+            $this->photoCanvas->insert($this->logCanvas, 'top-right', 30, 30);
+        }
+
         $this->photoCanvas->insert($this->memoCanvas, 'bottom', 0, 0);
+
 
         $path = 'storage/photos/temp/';
         $filename = $path . uniqid() . '.png';
@@ -173,7 +184,7 @@ class GeneratorService
 
         if (isset($log->temperature)) {
             $rightMemo .= $log->temperature;
-            $rightMemo .= ' ';
+            $rightMemo .= '℃';
         }
 
         if (isset($leftMemo)) {

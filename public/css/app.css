@@ -10528,3 +10528,20 @@ main {
   padding: 0.375rem 0 0.375rem 0.75rem;
 }
 
+.input-group input[type=radio] {
+  display: none;
+}
+
+/* 画像部分に余白を持たせる */
+
+label img {
+  margin: 3px;
+  padding: 5px;
+}
+
+/* 選択されたラジオボタンの画像の背景をオレンジ色に変える */
+
+.input-group input[type=radio]:checked + label img {
+  background: royalblue;
+}
+
