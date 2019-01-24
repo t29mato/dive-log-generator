@@ -12,8 +12,9 @@
     <div class="row mb-2">
         <div class="col-12">
             <div class="input-group">
-                <input tabindex="1" type="file" id="photo" name="photo" required>※ 推奨画像：縦横1,200ピクセル以上
-                @if(isset($oldInput))
+                <input tabindex="1" type="file" id="photo" name="photo" required>
+                <p>※ 推奨画像：縦横1,200ピクセル以上</p>
+                @if(isset($oldInput->numberDiving))
                 <button type="submit" class="btn btn-primary mb-2">フォトログ再生成</button>
                 @endif
             </div>
@@ -204,7 +205,7 @@
         </tbody>
     </table>
     <button type="submit" class="btn btn-primary">
-        @if(isset($oldInput))
+        @if(isset($oldInput->numberDiving))
         フォトログ再生成
         @else
         フォトログ生成
