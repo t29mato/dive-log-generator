@@ -109,7 +109,7 @@
                         <input tabindex="8" type="time" class="form-control" id="timeExit" name="timeExit" value=@if(isset($oldInput->timeExit))
                         {{ $oldInput->timeExit }}
                         @else
-                        10:00
+                        10:45
                         @endif
                     </div>
                 </td>
