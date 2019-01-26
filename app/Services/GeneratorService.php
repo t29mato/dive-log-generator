@@ -35,16 +35,11 @@ class GeneratorService
 
         $this->photoCanvas->insert($this->memoCanvas, 'bottom', 0, 0);
 
-
-        $path = 'storage/photos/temp/';
+        $path = 'storage/generatedPhoto/';
         $filename = $path . uniqid() . '.png';
-        if (!file_exists($path)) {
-            mkdir($path, 755, true);
-        }
         $this->photoCanvas->save($filename);
-        $imageUrl = url($filename);
-
-        return $imageUrl;
+        $photoUrl = url($filename);
+        return $photoUrl;
     }
 
     private function generateLogCanvas(DivingLog $log): \Intervention\Image\Image

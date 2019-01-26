@@ -57,8 +57,8 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn btn-primary" id="crop">Crop</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">キャンセル</button>
+                    <button type="button" class="btn btn-primary" id="crop">切り抜く</button>
                 </div>
             </div>
         </div>
