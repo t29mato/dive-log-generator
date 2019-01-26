@@ -65,7 +65,7 @@
     <h2>2. ダイビングログ入力</h2>
     <div class="row mb-2">
         <div class="col-6">
-            <span>本数</span>
+            <span>本数 (必須)</span>
             <div class="input-group">
                 <input tabindex="2" type="number" class="form-control" id="numberDiving" name="numberDiving" value=@if(isset($oldInput->numberDiving))
                 {{ $oldInput->numberDiving }}
@@ -256,28 +256,28 @@
                 @endif
                 checked>
                 <label for="top-left-white">
-                    <img class="img-fluid m-1" src="{{ asset('images/top-left-white.png') }}" width="80">
+                    <img class="img-fluid m-1" src="{{ asset('images/top-left-white.png') }}" width="100">
                 </label>
                 <input id="top-right-white" type="radio" name="template" value="top-right-white" @if($oldInput->template
                 === 'top-right-white')
                 checked
                 @endif>
                 <label for="top-right-white">
-                    <img class="img-fluid m-1" src="{{ asset('images/top-right-white.png') }}" width="80">
+                    <img class="img-fluid m-1" src="{{ asset('images/top-right-white.png') }}" width="100">
                 </label>
                 <input id="top-left-black" type="radio" name="template" value="top-left-black" @if($oldInput->template
                 === 'top-left-black')
                 checked
                 @endif>
                 <label for="top-left-black">
-                    <img class="img-fluid m-1" src="{{ asset('images/top-left-black.png') }}" width="80">
+                    <img class="img-fluid m-1" src="{{ asset('images/top-left-black.png') }}" width="100">
                 </label>
                 <input id="top-right-black" type="radio" name="template" value="top-right-black" @if($oldInput->template
                 === 'top-right-black')
                 checked
                 @endif>
                 <label for="top-right-black">
-                    <img class="img-fluid m-1" src="{{ asset('images/top-right-black.png') }}" width="80">
+                    <img class="img-fluid m-1" src="{{ asset('images/top-right-black.png') }}" width="100">
                 </label>
             </div>
         </div>
