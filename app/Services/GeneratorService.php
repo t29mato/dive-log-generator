@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Models\DivingLog;
 use Intervention\Image\Facades\Image;
+use Illuminate\Support\Facades\Storage;
 
 class GeneratorService
 {
@@ -139,7 +140,9 @@ class GeneratorService
     {
         $sizeX = 1200;
         $sizeY = 1200;
-        return \Image::make($photo)
+
+        // HACK: remove first character forcely.
+        return \Image::make(ltrim($photo, '/'))
             ->heighten($sizeX)
             ->encode('png', 80)
             ->crop($sizeX, $sizeY);

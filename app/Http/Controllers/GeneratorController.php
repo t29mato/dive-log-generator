@@ -24,7 +24,7 @@ class GeneratorController extends Controller
 
     public function generate(Request $request)
     {
-        $this->validate($request, DivingLog::$rules);
+        // $this->validate($request, DivingLog::$rules);
         $this->divingLog->setDivingLog($request);
         $imageUrl = $this->generatorService->generate($this->divingLog, $request->template);
         $oldInput = $request;

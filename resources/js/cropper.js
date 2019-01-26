@@ -52,8 +52,8 @@ window.addEventListener('DOMContentLoaded', function () {
         $modal.modal('hide');
         if (cropper) {
             canvas = cropper.getCroppedCanvas({
-                width: 160,
-                height: 160,
+                width: 1200,
+                height: 1200,
             });
             initialAvatarURL = avatar.src;
             // avatar.src = canvas.toDataURL();
@@ -84,13 +84,13 @@ window.addEventListener('DOMContentLoaded', function () {
                         return xhr;
                     },
                     success: function (response) {
-                        console.log(response);
                         avatar.src = response;
-                        $alert.show().addClass('alert-success').text('Upload success');
+                        $('#photo').val(response);
+                        $alert.show().addClass('alert-success').text('写真アップロード成功');
                     },
                     error: function () {
                         avatar.src = initialAvatarURL;
-                        $alert.show().addClass('alert-warning').text('Upload error');
+                        $alert.show().addClass('alert-warning').text('写真アップロード失敗');
                     },
                     complete: function () {
                         $progress.hide();

@@ -22,10 +22,6 @@ class DivingLog
     public $place;
     public $photo;
 
-    public static $rules = array(
-        'photo' => 'required|image|'
-    );
-
     public function setDivingLog($request)
     {
         $this->numberDiving = $this->issetRequest($request->numberDiving);
@@ -42,7 +38,7 @@ class DivingLog
         $this->weather = $this->issetRequest($request->weather);
         $this->temperature = $this->issetRequest($request->temperature);
         $this->place = $this->issetRequest($request->place);
-        $this->photo = $this->issetRequest(Input::file('photo'));
+        $this->photo = $this->issetRequest($request->photo);
     }
     private function issetRequest($data) {
         if (isset($data)) {

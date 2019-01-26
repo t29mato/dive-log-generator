@@ -1,6 +1,7 @@
 @extends('common')
 
 @section('content')
+<!-- HACK inline css -->
 <style>
     .label {
       cursor: pointer;
@@ -16,56 +17,51 @@
       max-width: 100%;
     }
   </style>
-@if(isset($imageUrl))
-<img src="{{ $imageUrl }}" class="img-fluid mb-3" width="500"><br>
-<a href="{{ $imageUrl }}" download="#{{ $oldInput->numberDiving . '_' . $oldInput->dateDiving }}" class="btn btn-secondary mb-2">ダウンロード</a>
-@endif
-<form action="{{ route('generate') }}" method="post" enctype="multipart/form-data" class="p-2">
-
-<h1>Upload cropped image to server</h1>
-    <label class="label" data-toggle="tooltip" title="Change your avatar">
-      <img class="rounded" id="avatar" src="https://avatars0.githubusercontent.com/u/3456749?s=160" alt="avatar">
-      <input type="file" class="sr-only" id="input" name="image" accept="image/*">
+<form action="{{ route('generate') }}" method="post" enctype="multipart/form-data">
+    {{ csrf_field() }}
+    @if(isset($imageUrl))
+            <img src="{{ $imageUrl }}" class="img-fluid mb-3" width="500"><br>
+            <a href="{{ $imageUrl }}" download="#{{ $oldInput->numberDiving . '_' . $oldInput->dateDiving }}" class="btn btn-secondary">ダウンロード</a>
+    @endif
+    <button type="submit" class="btn btn-primary">
+        @if(isset($oldInput->numberDiving))
+        フォトログ再生成
+        @endif
+    </button>
+    <h2 class="mt-4">1. 写真選択</h2>
+    <label class="label" id="photo-label" data-toggle="tooltip" title="Select Your Photo">
+        <img id="avatar" src="@if(isset($oldInput->photo)) {{ $oldInput->photo }} @else /images/sample-photo.png @endif"
+            width="150">
+        <input tabindex="1" type="file" class="sr-only" id="input" name="image" accept="image/*">
+        <input type="hidden" id="photo" name="photo" value="@if(isset($oldInput->photo)) {{ $oldInput->photo }} @else /images/sample-photo.png @endif">
     </label>
     <div class="progress">
-      <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0%</div>
+        <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="0"
+            aria-valuemin="0" aria-valuemax="100">0%</div>
     </div>
     <div class="alert" role="alert"></div>
     <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="modalLabel">Crop the image</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <div class="img-container">
-              <img id="image" src="https://avatars0.githubusercontent.com/u/3456749">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalLabel">Crop the image</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="img-container">
+                        <img id="image" src="https://avatars0.githubusercontent.com/u/3456749">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary" id="crop">Crop</button>
+                </div>
             </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-            <button type="button" class="btn btn-primary" id="crop">Crop</button>
-          </div>
         </div>
-      </div>
     </div>
 
-    {{ csrf_field() }}
-    <h2>1. 写真選択</h2>
-    <div class="row mb-2">
-        <div class="col-12">
-            <div class="input-group">
-                <input tabindex="1" type="file" id="photo" name="photo" required>
-                <p>※ 推奨画像：縦横1,200ピクセル以上</p>
-                @if(isset($oldInput->numberDiving))
-                <button type="submit" class="btn btn-primary mb-2">フォトログ再生成</button>
-                @endif
-            </div>
-        </div>
-    </div>
     <h2>2. ダイビングログ入力</h2>
     <div class="row mb-2">
         <div class="col-6">
@@ -85,7 +81,8 @@
         <div class="col-6">
             <span>日付</span>
             <div class="input-group">
-                <input tabindex="3" type="date" class="form-control" id="dateDiving" name="dateDiving" value="{{ $oldInput->dateDiving }}" required>
+                <input tabindex="3" type="date" class="form-control" id="dateDiving" name="dateDiving" value="{{ $oldInput->dateDiving }}"
+                    required>
             </div>
         </div>
     </div>
@@ -254,26 +251,30 @@
     <div class="row">
         <div class="col-12">
             <div class="input-group">
-                <input id="top-left-white" type="radio" name="template" value="top-left-white" @if($oldInput->template === 'top-left-white')
+                <input id="top-left-white" type="radio" name="template" value="top-left-white" @if($oldInput->template
+                === 'top-left-white')
                 checked
                 @endif
                 checked>
                 <label for="top-left-white">
                     <img class="img-fluid m-1" src="{{ asset('images/top-left-white.png') }}" width="80">
                 </label>
-                <input id="top-right-white" type="radio" name="template" value="top-right-white" @if($oldInput->template === 'top-right-white')
+                <input id="top-right-white" type="radio" name="template" value="top-right-white" @if($oldInput->template
+                === 'top-right-white')
                 checked
                 @endif>
                 <label for="top-right-white">
                     <img class="img-fluid m-1" src="{{ asset('images/top-right-white.png') }}" width="80">
                 </label>
-                <input id="top-left-black" type="radio" name="template" value="top-left-black" @if($oldInput->template === 'top-left-black')
+                <input id="top-left-black" type="radio" name="template" value="top-left-black" @if($oldInput->template
+                === 'top-left-black')
                 checked
                 @endif>
                 <label for="top-left-black">
                     <img class="img-fluid m-1" src="{{ asset('images/top-left-black.png') }}" width="80">
                 </label>
-                <input id="top-right-black" type="radio" name="template" value="top-right-black" @if($oldInput->template === 'top-right-black')
+                <input id="top-right-black" type="radio" name="template" value="top-right-black" @if($oldInput->template
+                === 'top-right-black')
                 checked
                 @endif>
                 <label for="top-right-black">
