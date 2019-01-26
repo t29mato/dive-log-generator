@@ -25,7 +25,7 @@ main {
   }
   $border-width: 3px;
   $border-style: solid;
-  $border-color: royalblue;
+  $border-color: darkorange;
   .b-top {
     border-top: $border-style $border-width $border-color;
   }
@@ -49,10 +49,10 @@ main {
 /* 画像部分に余白を持たせる */
 label img {
   margin: 3px;
-  padding: 5px;
+  padding: 3px;
 }
 
 /* 選択されたラジオボタンの画像の背景をオレンジ色に変える */
 .input-group input[type="radio"]:checked + label img {
-  background: royalblue;
+  background: darkorange;
 }

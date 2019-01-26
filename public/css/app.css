@@ -10509,19 +10509,19 @@ main {
 }
 
 .table-dive-diagram .b-top {
-  border-top: solid 3px royalblue;
+  border-top: solid 3px darkorange;
 }
 
 .table-dive-diagram .b-right {
-  border-right: solid 3px royalblue;
+  border-right: solid 3px darkorange;
 }
 
 .table-dive-diagram .b-bottom {
-  border-bottom: solid 3px royalblue;
+  border-bottom: solid 3px darkorange;
 }
 
 .table-dive-diagram .b-left {
-  border-left: solid 3px royalblue;
+  border-left: solid 3px darkorange;
 }
 
 .table-dive-diagram .form-control {
@@ -10536,12 +10536,12 @@ main {
 
 label img {
   margin: 3px;
-  padding: 5px;
+  padding: 3px;
 }
 
 /* 選択されたラジオボタンの画像の背景をオレンジ色に変える */
 
 .input-group input[type=radio]:checked + label img {
-  background: royalblue;
+  background: darkorange;
 }
 

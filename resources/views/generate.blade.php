@@ -1,6 +1,8 @@
 @extends('common')
 
 @section('content')
+<script src="{{ asset('js/cropper.js') }}"></script>
+
 <!-- HACK inline css -->
 <style>
     .label {
@@ -290,5 +292,4 @@
         @endif
     </button>
 </form>
-<script src="{{ asset('js/cropper.js') }}"></script>
 @endsection
