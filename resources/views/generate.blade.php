@@ -81,8 +81,7 @@
         <div class="col-6">
             <span>日付</span>
             <div class="input-group">
-                <input tabindex="3" type="date" class="form-control" id="dateDiving" name="dateDiving" value="{{ $oldInput->dateDiving }}"
-                    required>
+                <input tabindex="3" type="date" class="form-control" id="dateDiving" name="dateDiving" value="{{ $oldInput->dateDiving }}">
             </div>
         </div>
     </div>

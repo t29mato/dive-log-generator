@@ -175,7 +175,7 @@ class GeneratorService
         }
 
         $rightMemo = '';
-        if (isset($log->dateDiving)) {
+        if (isset($log->dateDiving) && !$log->dateDiving === '') {
             $rightMemo .= $this->formatDate($log->dateDiving);
             $rightMemo .= ' ';
         }
