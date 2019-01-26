@@ -173,7 +173,7 @@ class GeneratorService
 
         $rightMemo = '';
         if (isset($log->dateDiving)) {
-            $rightMemo .= $log->dateDiving;
+            $rightMemo .= $this->formatDate($log->dateDiving);
             $rightMemo .= ' ';
         }
 
@@ -239,5 +239,20 @@ class GeneratorService
             $font->align('left');
         };
         return $return;
+    }
+
+    private function formatDate($date) {
+        if (!isset($date)) {
+            return null;
+        }
+        $week = array('日', '月', '火', '水', '木', '金', '土');
+        $arrayDate = explode('-', $date);
+        $resultDate = date('Y/m/d', mktime(
+            0, 0, 0, $arrayDate[1], $arrayDate[2], $arrayDate[0]
+        ));
+        $resultWeek = date('w', mktime(
+            0, 0, 0, $arrayDate[1], $arrayDate[2], $arrayDate[0]
+        ));
+        return $resultDate . '(' . $week[$resultWeek] .')';
     }
 }
