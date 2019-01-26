@@ -23,11 +23,11 @@
             <img src="{{ $imageUrl }}" class="img-fluid mb-3" width="500"><br>
             <a href="{{ $imageUrl }}" download="#{{ $oldInput->numberDiving . '_' . $oldInput->dateDiving }}" class="btn btn-secondary">ダウンロード</a>
     @endif
-    <button type="submit" class="btn btn-primary">
-        @if(isset($oldInput->numberDiving))
+    @if(isset($oldInput->numberDiving))
+        <button type="submit" class="btn btn-primary">
         フォトログ再生成
-        @endif
     </button>
+    @endif
     <h2 class="mt-4">1. 写真選択</h2>
     <label class="label" id="photo-label" data-toggle="tooltip" title="Select Your Photo">
         <img id="avatar" src="@if(isset($oldInput->photo)) {{ $oldInput->photo }} @else /images/sample-photo.png @endif"
