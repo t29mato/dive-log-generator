@@ -34,4 +34,11 @@ class GeneratorController extends Controller
             'oldInput' => $oldInput,
         ]);
     }
+
+    public function upload(Request $request)
+    {
+        $path = $request->croppedImage->store('public/croppedPhoto');
+        $url = Storage::url($path);
+        return $url;
+    }
 }

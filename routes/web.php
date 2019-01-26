@@ -15,4 +15,4 @@ Route::get('/', 'HomeController@home')->name('home');
 Route::get('/generate', 'GeneratorController@index')->name('generate');
 Route::post('/generate', 'GeneratorController@generate');
 
-Route::post('/photo', 'GeneratorController@upload');
+Route::post('/upload', 'GeneratorController@upload');
