@@ -4,7 +4,7 @@
 
 @if(isset($imageUrl))
 <img src="{{ $imageUrl }}" class="img-fluid mb-3" width="500"><br>
-<a href="{{ $imageUrl }}" download="PhotoDiveLog_{{ $oldInput->dateDiving }}" class="btn btn-secondary mb-2">ダウンロード</a>
+<a href="{{ $imageUrl }}" download="#{{ $oldInput->numberDiving . '_' . $oldInput->dateDiving }}" class="btn btn-secondary mb-2">ダウンロード</a>
 @endif
 <form action="{{ route('generate') }}" method="post" enctype="multipart/form-data" class="p-2">
     {{ csrf_field() }}
@@ -30,7 +30,7 @@
                 @else
                 100
                 @endif
-                min="1" max="99999">
+                min="1" max="99999" required>
                 <div class="input-group-append">
                     <span class="input-group-text">本目</span>
                 </div>
@@ -39,7 +39,7 @@
         <div class="col-6">
             <span>日付</span>
             <div class="input-group">
-                <input tabindex="3" type="date" class="form-control" id="dateDiving" name="dateDiving" value="{{ $oldInput->dateDiving }}">
+                <input tabindex="3" type="date" class="form-control" id="dateDiving" name="dateDiving" value="{{ $oldInput->dateDiving }}" required>
             </div>
         </div>
     </div>
@@ -204,7 +204,7 @@
             </tr>
         </tbody>
     </table>
-    <h2>3. テンプレートを選択</h2>
+    <h2>3. テンプレート選択</h2>
     <div class="row">
         <div class="col-12">
             <div class="input-group">
