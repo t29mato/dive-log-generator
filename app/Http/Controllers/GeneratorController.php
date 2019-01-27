@@ -37,6 +37,7 @@ class GeneratorController extends Controller
 
     public function upload(Request $request)
     {
+        \Log::debug($request);
         $path = $request->croppedImage->store('public/croppedPhoto');
         $url = Storage::url($path);
         return $url;
