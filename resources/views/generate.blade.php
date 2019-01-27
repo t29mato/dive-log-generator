@@ -31,7 +31,7 @@
     </button>
     @endif
     <h2 class="mt-4">1. 写真選択</h2>
-    <label class="label" id="photo-label" data-toggle="tooltip" title="Select Your Photo">
+    <label class="label" id="photo-label" data-toggle="tooltip" title="写真を選択する">
         <img id="avatar" src="@if(isset($oldInput->photo)) {{ $oldInput->photo }} @else /images/sample-photo.png @endif"
             width="150">
         <input tabindex="1" type="file" class="sr-only" id="input" name="image" accept="image/*">
