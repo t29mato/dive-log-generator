@@ -2,7 +2,8 @@
 
 No|Date|Time (h)|Action|Place
 |:-|:-|:-|:-|:-|:-|
-09|2019-01-23|6.0|画像のリサイズ可能に|自宅&ドトール久我山|
+10|2019-01-27|10.0|AWS LightSail本番構築, ドメイン取得|ドドール久我山w/たくまさん, 自宅|
+09|2019-01-26|8.0|画像のリサイズ可能に。heroku構築も本番AWSの方が安くて高性能でいっかと判断して方向転換|自宅, ドトール久我山, 自宅|
 09|2019-01-22|3.0|テンプレート追加|自宅|
 08|2019-01-21|2.0|Modelリファクタ|自宅|
 07|2019-01-20|6.0|Modelリファクタ|自宅|
@@ -33,3 +34,12 @@ php artisan key:generate
 sudo service nginx start
 sudo vi /etc/nginx/nginx.conf
 sudo vim /etc/php-fpm.d/www.conf
+
+## php.ini
+post_max_size change over 20M
+upload_max_filesize change over 20M
+
+## nginx
+server {
+    client_max_body_size 20M;
+}
