@@ -22,8 +22,7 @@
         </p>
         <h2>アンケートフォーム</h2>
         <p>
-            アンケートフォームはこちらです。(Googleフォームに飛びます)<br>
-            <a href="https://docs.google.com/forms/d/1P0_IAzYjZ8sUfIOJO6grkGem9PkMNxtymxTca0zB1YM/edit" target="_blank">https://docs.google.com/forms/d/1P0_IAzYjZ8sUfIOJO6grkGem9PkMNxtymxTca0zB1YM/edit</a><br><br>
+            <a href="https://docs.google.com/forms/d/1P0_IAzYjZ8sUfIOJO6grkGem9PkMNxtymxTca0zB1YM/edit" target="_blank">Googleフォーム</a><br><br>
             アンケートではなくて、直接連絡をいただけるという方は、こちらのTwitterでも大丈夫です。<br>
             <a href="https://twitter.com/t2kmato" target="_blank">https://twitter.com/t2kmato</a>
         </p>
