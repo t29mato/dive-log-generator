@@ -12,7 +12,10 @@
 */
 
 Route::get('/', 'HomeController@home')->name('home');
+Route::get('/form', 'HomeController@form')->name('form');
+
 Route::get('/generate', 'GeneratorController@index')->name('generate');
 Route::post('/generate', 'GeneratorController@generate');
 
 Route::post('/upload', 'GeneratorController@upload');
+
