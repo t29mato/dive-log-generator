@@ -14,10 +14,6 @@
     <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="{{ asset('js/cropper.min.js') }}"></script>
 
-    <!-- Fonts -->
-    <!-- <link rel="dns-prefetch" href="https://fonts.gstatic.com"> -->
-    <!-- <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css"> -->
-
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/cropper.min.css') }}">
@@ -28,7 +24,8 @@
     <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
         <div class="container">
             <a class="navbar-brand" href="{{ url('/') }}">
-                {{ config('app.name', 'Laravel') }}
+            <img src="{{ asset('images/logo-umineco.png') }}" height="25" class="mr-2" />
+            <img src="{{ asset('images/font-umineco.png') }}" height="20" />
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}"
@@ -59,9 +56,16 @@
 
     <footer class="bd-footer text-muted">
         <div class="container p-3 p-md-5">
-            <p>Designed and built with all the love in the world by
-                <a href="https://twitter.com/t2kmato" target="_blank" rel="noopener">@mato</a>
-            </p>
+            <div class="row">
+                <div class="col-md-3">
+                    <img src="{{ asset('images/icon-umineco.png') }}" height="100">
+                </div>
+                <div class="col-md-9">
+                    <p>Designed and built with all the love in the world by
+                        <a href="https://twitter.com/t2kmato" target="_blank" rel="noopener">@mato</a>
+                    </p>
+                </div>
+            </div>
         </div>
     </footer>
 </body>
