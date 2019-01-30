@@ -8,6 +8,12 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
+    <!-- OGP -->
+    <meta property="og:title" content="{{ config('app.name', 'うみねこログ') }}" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="{{ url('home') }}" />
+    <meta property="og:image" content="{{ asset('images/home_generated_photo_1.png') }}" />
+
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Scripts -->
