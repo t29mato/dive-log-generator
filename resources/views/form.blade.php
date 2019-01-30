@@ -24,7 +24,7 @@
         <p>
             <a href="https://docs.google.com/forms/d/1P0_IAzYjZ8sUfIOJO6grkGem9PkMNxtymxTca0zB1YM/edit" target="_blank">Googleフォーム</a><br><br>
             アンケートではなくて、直接連絡をいただけるという方は、こちらのTwitterでも大丈夫です。<br>
-            <a href="https://twitter.com/t2kmato" target="_blank">https://twitter.com/t2kmato</a>
+            <a href="https://twitter.com/umineco2019" target="_blank">https://twitter.com/umineco2019</a>
         </p>
         <h2>その他</h2>
         <p>
