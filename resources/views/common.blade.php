@@ -78,7 +78,7 @@
                 </div>
                 <div class="col-md-9">
                     <p>Designed and built with all the love in the world by
-                        <a href="https://twitter.com/t2kmato" target="_blank" rel="noopener">@mato</a>
+                        <a href="https://twitter.com/umineco2019" target="_blank" rel="noopener">@mato</a>
                     </p>
                 </div>
             </div>
