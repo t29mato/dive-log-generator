@@ -77,19 +77,19 @@ upload_max_filesize change over 20M
 ## SSL
 ```
 sudo ./certbot-auto certonly --webroot -w /var/www/dive-log-generator/public -d log.umineco.me --email tomoya.matou@gmail.com --debug
-```
+
 
 # For more information on configuration, see:
 #   * Official English Documentation: http://nginx.org/en/docs/
 #   * Official Russian Documentation: http://nginx.org/ru/docs/
-```
+
 user nginx;
 worker_processes auto;
 error_log /var/log/nginx/error.log;
 pid /var/run/nginx.pid;
-```
+
 # Load dynamic modules. See /usr/share/doc/nginx/README.dynamic.
-```
+
 include /usr/share/nginx/modules/*.conf;
 
 events {
