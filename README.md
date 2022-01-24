@@ -1,4 +1,5 @@
 # LightSail (Amazon Linux)
+```
 sudo yum update
 sudo yum install php72 php72-mbstring php72-pdo php72-pecl-imagick php72-intl php72-fpm git nginx
 
@@ -20,8 +21,9 @@ cp .env.example .env
 php artisan key:generate
 
 sudo service nginx start
-
+```
 ## eginx is mystery.
+```
 sudo vi /etc/nginx/nginx.conf
 --- index   index.html index.htm;
 +++ index   index.php index.html index.htm;
@@ -65,32 +67,38 @@ sudo vi /etc/php-fpm.d/www.conf
 sudo vi /etc/php-fpm-7.2.d/www.conf
     ; listen /var/run/php-fpm/www.sock;
     ; listen = /var/run/php7.2-fpm.sock
-
+```
 ## php.ini
+```
 post_max_size change over 20M
 upload_max_filesize change over 20M
+```
 
 ## SSL
+```
 sudo ./certbot-auto certonly --webroot -w /var/www/dive-log-generator/public -d log.umineco.me --email tomoya.matou@gmail.com --debug
-
+```
 
 # For more information on configuration, see:
 #   * Official English Documentation: http://nginx.org/en/docs/
 #   * Official Russian Documentation: http://nginx.org/ru/docs/
-
+```
 user nginx;
 worker_processes auto;
 error_log /var/log/nginx/error.log;
 pid /var/run/nginx.pid;
-
+```
 # Load dynamic modules. See /usr/share/doc/nginx/README.dynamic.
+```
 include /usr/share/nginx/modules/*.conf;
 
 events {
     worker_connections 1024;
 }
+```
 
 ## /etc/nginx/nginx.conf
+```
 http {
     log_format  main  '$remote_addr - $remote_user [$time_local] "$request" '
                       '$status $body_bytes_sent "$http_referer" '
@@ -197,6 +205,8 @@ http {
     }
 
 }
-
+```
+```
 vi cron.conf
     0 4 1 * * /usr/local/certbot/certbot-auto renew && sudo service nginx restart
+```
