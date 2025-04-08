@@ -1,3 +1,5 @@
+<img src="https://github.com/t29mato/dive-log-generator/blob/develop/public/images/home_generated_photo_1.png?raw=true" width=600>
+
 # LightSail (Amazon Linux)
 ```
 sudo yum update
